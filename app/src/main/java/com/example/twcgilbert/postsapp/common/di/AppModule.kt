@@ -1,5 +1,6 @@
 package com.example.twcgilbert.postsapp.common.di
 
+import com.example.twcgilbert.postsapp.io.Constants
 import com.example.twcgilbert.postsapp.io.DataRepository
 import com.example.twcgilbert.postsapp.io.DataRepositoryImpl
 import com.example.twcgilbert.postsapp.io.data.User
@@ -23,7 +24,7 @@ class AppModule {
     @Singleton
     fun provideDataRepository(): DataRepository {
         val retrofit = Retrofit.Builder()
-                .baseUrl("http://jsonplaceholder.typicode.com/")
+                .baseUrl(Constants.BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .build()
