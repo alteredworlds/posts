@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Posts App</string>
+    <string name="posts">Posts</string>
+    <string name="post_detail">Post</string>
+</resources>

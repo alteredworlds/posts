@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="left_right_margin">16dp</dimen>
+    <dimen name="post_item_top_bottom_margin">10dp</dimen>
+    <dimen name="bottom_margin">16dp</dimen>
+    <dimen name="space_between_fields">16dp</dimen>
+
+    <dimen name="details_avatar_size">128dp</dimen>
+    <dimen name="post_item_avatar_size">24dp</dimen>
+    <dimen name="post_item_title_margin_start">10dp</dimen>
+</resources>

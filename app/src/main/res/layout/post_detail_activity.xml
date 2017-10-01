@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.example.twcgilbert.postsapp.ui.detail.PostDetailActivityContract.ViewModel" />
+    </data>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.v7.widget.Toolbar
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/colorPrimary">
+
+            <TextView
+                style="@style/TextTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/post_detail" />
+
+        </android.support.v7.widget.Toolbar>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="@dimen/left_right_margin"
+            android:layout_marginStart="@dimen/left_right_margin"
+            android:layout_marginTop="?attr/actionBarSize"
+            android:layout_marginBottom="@dimen/bottom_margin"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{viewModel.postTitle}" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/space_between_fields"
+                android:text="@{viewModel.postBody}" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/space_between_fields"
+                android:text="@{viewModel.postUserName}" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/space_between_fields"
+                android:text="@{viewModel.postNumberOfComments}" />
+
+            <ImageView
+                android:layout_width="@dimen/details_avatar_size"
+                android:layout_height="@dimen/details_avatar_size"
+                app:imageUrl="@{viewModel.userAvatarUrl}"/>
+
+        </LinearLayout>
+
+    </FrameLayout>
+</layout>
