@@ -3,8 +3,8 @@ package com.example.twcgilbert.postsapp
 import android.app.Activity
 import android.app.Application
 import com.example.twcgilbert.postsapp.common.di.DaggerAppComponent
-import dagger.android.HasActivityInjector
 import dagger.android.DispatchingAndroidInjector
+import dagger.android.HasActivityInjector
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -12,8 +12,7 @@ import javax.inject.Inject
 /**
  * Created by twcgilbert on 01/10/2017.
  */
-class PostsApplication : Application(), HasActivityInjector {
-
+open class PostsApplication : Application(), HasActivityInjector {
     @Inject lateinit var dispatchingActivityInjector: DispatchingAndroidInjector<Activity>
 
     override fun onCreate() {
@@ -22,7 +21,7 @@ class PostsApplication : Application(), HasActivityInjector {
         setupLogger()
     }
 
-    private fun injectDependencies() {
+    protected open fun injectDependencies() {
         DaggerAppComponent
                 .builder()
                 .application(this)
