@@ -1,9 +1,9 @@
 package com.example.twcgilbert.postsapp.ui.posts
 
 import android.databinding.ObservableBoolean
+import android.databinding.ObservableField
 import com.example.twcgilbert.postsapp.io.DataRepository
 import com.example.twcgilbert.postsapp.io.data.Post
-import com.example.twcgilbert.postsapp.ui.posts.adapter.PostsAdapter
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
@@ -15,12 +15,11 @@ import timber.log.Timber
 class PostsActivityViewModel(
         private val view: PostsActivityContract.View,
         private val repository: DataRepository) :
-        PostsActivityContract.ViewModel,
-        PostsActivityContract.PostClicked {
+        PostsActivityContract.ViewModel {
 
     private val disposables = CompositeDisposable()
 
-    override val adapter = PostsAdapter(this)
+    override val posts = ObservableField<List<Post>>(ArrayList<Post>(0))
 
     override val progressVisible = ObservableBoolean()
 
@@ -33,7 +32,7 @@ class PostsActivityViewModel(
                         {
                             Timber.d("We should now have %d posts!", it.size);
                             progressVisible.set(false)
-                            adapter.setItems(it)
+                            posts.set(it)
                         },
                         {
                             Timber.d(it, "Failed to retrieve posts!")

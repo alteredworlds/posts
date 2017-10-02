@@ -37,7 +37,8 @@
             android:layout_marginStart="@dimen/left_right_margin"
             android:layout_marginTop="?attr/actionBarSize"
             android:text="Hello World!"
-            app:adapter="@{viewModel.adapter}"
+            app:posts="@{viewModel.posts}"
+            app:postsClickListener="@{viewModel}"
             app:horizontalDivider="@{@drawable/horizontal_space_divider}"
             app:layoutManager="android.support.v7.widget.LinearLayoutManager" />
 
