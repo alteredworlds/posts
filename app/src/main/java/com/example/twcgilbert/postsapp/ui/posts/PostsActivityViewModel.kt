@@ -1,7 +1,6 @@
 package com.example.twcgilbert.postsapp.ui.posts
 
 import android.databinding.ObservableBoolean
-import android.support.v7.widget.LinearLayoutManager
 import com.example.twcgilbert.postsapp.io.DataRepository
 import com.example.twcgilbert.postsapp.io.data.Post
 import com.example.twcgilbert.postsapp.ui.posts.adapter.PostsAdapter
@@ -20,8 +19,6 @@ class PostsActivityViewModel(
         PostsActivityContract.PostClicked {
 
     private val disposables = CompositeDisposable()
-
-    override val layoutManager = LinearLayoutManager(view.context)
 
     override val adapter = PostsAdapter(this)
 
