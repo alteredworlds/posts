@@ -14,6 +14,7 @@ android {
         versionName "1.0"
         testInstrumentationRunner "com.example.twcgilbert.postsapp.PostsTestRunner"
     }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -44,11 +45,21 @@ dependencies {
     implementation "com.android.support:appcompat-v7:$support_library_version"
     implementation "com.android.support:recyclerview-v7:$support_library_version"
     implementation "com.android.support.constraint:constraint-layout:$constraint_layout_version"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+
+    // Dependencies for local unit tests
     testImplementation "junit:junit:$junit_version"
+    testImplementation "org.mockito:mockito-all:$mockito_version"
+    testImplementation "org.hamcrest:hamcrest-all:$hamcrest_version"
+    testImplementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    testImplementation "org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version"
+
+    // Dependencies for Android unit tests
+    androidTestImplementation "junit:junit:$junit_version"
+    androidTestImplementation "org.mockito:mockito-core:$mockito_version"
     androidTestImplementation("com.android.support.test.espresso:espresso-core:$espresso_version", {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
 
     // databinding
     kapt "com.android.databinding:compiler:$gradle_plugin_version"

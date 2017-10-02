@@ -13,7 +13,8 @@ import javax.inject.Singleton
 @Singleton
 @Component(modules = arrayOf(
         AndroidSupportInjectionModule::class,
-        AppModule::class,
+        //AppModule::class, // uncomment => all posts in androidTest
+        TestAppModule::class, // this shows just one post, so one or the other
         ActivityBuilderModule::class)
 )
 interface TestAppComponent {

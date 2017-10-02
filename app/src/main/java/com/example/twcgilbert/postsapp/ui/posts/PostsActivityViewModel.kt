@@ -4,9 +4,8 @@ import android.databinding.ObservableBoolean
 import android.databinding.ObservableField
 import com.example.twcgilbert.postsapp.io.DataRepository
 import com.example.twcgilbert.postsapp.io.data.Post
-import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.Scheduler
 import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.schedulers.Schedulers
 import timber.log.Timber
 
 /**
@@ -14,7 +13,9 @@ import timber.log.Timber
  */
 class PostsActivityViewModel(
         private val view: PostsActivityContract.View,
-        private val repository: DataRepository) :
+        private val repository: DataRepository,
+        private val ioScheduler: Scheduler,
+        private val androidScheduler: Scheduler) :
         PostsActivityContract.ViewModel {
 
     private val disposables = CompositeDisposable()
@@ -26,8 +27,8 @@ class PostsActivityViewModel(
     override fun onCreate() {
         progressVisible.set(true)
         disposables.add(repository.getPosts()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(ioScheduler)
+                .observeOn(androidScheduler)
                 .subscribe(
                         {
                             Timber.d("We should now have %d posts!", it.size);

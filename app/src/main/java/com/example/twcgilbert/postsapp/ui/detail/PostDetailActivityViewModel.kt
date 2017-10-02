@@ -1,13 +1,11 @@
 package com.example.twcgilbert.postsapp.ui.detail
 
-import com.example.twcgilbert.postsapp.io.data.Post
-
 import android.databinding.ObservableField
 import com.example.twcgilbert.postsapp.io.DataRepository
+import com.example.twcgilbert.postsapp.io.data.Post
 import com.example.twcgilbert.postsapp.io.data.imageUrl
-import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.Scheduler
 import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.schedulers.Schedulers
 
 /**
  * Created by twcgilbert on 01/10/2017.
@@ -15,7 +13,9 @@ import io.reactivex.schedulers.Schedulers
 class PostDetailActivityViewModel(
         private val view: PostDetailActivityContract.View,
         private val post: Post,
-        private val repository: DataRepository) :
+        private val repository: DataRepository,
+        private val ioScheduler: Scheduler,
+        private val androidScheduler: Scheduler) :
         PostDetailActivityContract.ViewModel {
 
     private val disposables = CompositeDisposable()
@@ -34,8 +34,8 @@ class PostDetailActivityViewModel(
         // find number of comments
         disposables.add(repository
                 .getComments(post.id)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(ioScheduler)
+                .observeOn(androidScheduler)
                 .subscribe(
                         {
                             postNumberOfComments.set(it.size.toString())

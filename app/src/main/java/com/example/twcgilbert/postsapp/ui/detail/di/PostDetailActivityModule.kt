@@ -8,6 +8,8 @@ import com.example.twcgilbert.postsapp.ui.detail.PostDetailActivityContract
 import com.example.twcgilbert.postsapp.ui.detail.PostDetailActivityViewModel
 import dagger.Module
 import dagger.Provides
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 
 /**
  * Created by twcgilbert on 01/10/2017.
@@ -25,6 +27,10 @@ class PostDetailActivityModule {
     fun providesViewModel(
             view: PostDetailActivityContract.View,
             post: Post,
-            repository: DataRepository):
-            PostDetailActivityContract.ViewModel = PostDetailActivityViewModel(view, post, repository)
+            repository: DataRepository): PostDetailActivityContract.ViewModel =
+            PostDetailActivityViewModel(view,
+                    post,
+                    repository,
+                    Schedulers.io(),
+                    AndroidSchedulers.mainThread())
 }
