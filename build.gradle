@@ -19,6 +19,7 @@ buildscript {
         dagger_version = '2.11'
         picasso_version = '2.5.2'
         conditionwatcher_version = '0.2'
+        leak_canary_version = '1.5.4'
     }
 
     repositories {

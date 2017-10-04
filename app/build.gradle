@@ -73,12 +73,17 @@ dependencies {
     // Async image display
     implementation "com.squareup.picasso:picasso:$picasso_version"
 
+    // memory leak detection utility library
+    debugImplementation "com.squareup.leakcanary:leakcanary-android:$leak_canary_version"
+    releaseImplementation "com.squareup.leakcanary:leakcanary-android-no-op:$leak_canary_version"
+
     // LOCAL UNIT TESTS: dependencies
     testImplementation "junit:junit:$junit_version"
     testImplementation "org.mockito:mockito-all:$mockito_version"
     testImplementation "org.hamcrest:hamcrest-all:$hamcrest_version"
     testImplementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     testImplementation "org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version"
+    testImplementation "com.squareup.leakcanary:leakcanary-android-no-op:$leak_canary_version"
 
     // LOCAL UNIT TESTS: annotation processing
     kaptTest "com.android.databinding:compiler:$gradle_plugin_version"
@@ -103,6 +108,7 @@ dependencies {
     androidTestImplementation "com.azimolabs.conditionwatcher:conditionwatcher:$conditionwatcher_version"
     androidTestImplementation "com.google.dagger:dagger-android:$dagger_version"
     androidTestImplementation "com.google.dagger:dagger-android-support:$dagger_version"
+    androidTestImplementation "com.squareup.leakcanary:leakcanary-android-no-op:$leak_canary_version"
 
     // ANDROID UNIT TESTS: annotation processing
     kaptAndroidTest "com.google.dagger:dagger-compiler:$dagger_version"
