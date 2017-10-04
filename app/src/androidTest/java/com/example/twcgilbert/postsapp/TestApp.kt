@@ -13,9 +13,6 @@ class TestApp : PostsApplication(), Application.ActivityLifecycleCallbacks {
 
     var currentActivity: Activity? = null
 
-    //TODO: uncomment this to use test data source. NOTE: Android Studio *may* have an issue
-    //TODO: with Dagger compiler in androidTests; for me this only works after one
-    //TODO: successful androidTest run *without* this uncommented
     override fun injectDependencies() {
         // can be used to supply alternate modules for testing eg: DataRepository
         DaggerTestAppComponent.builder()
