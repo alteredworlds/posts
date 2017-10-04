@@ -2,4 +2,5 @@
     <string name="app_name">Posts App</string>
     <string name="posts">Posts</string>
     <string name="post_detail">Post</string>
+    <string name="num_comments">%1$d comments</string>
 </resources>

@@ -22,7 +22,7 @@ interface PostDetailActivityContract {
 
         val postUserName: ObservableField<String>
 
-        val postNumberOfComments: ObservableField<String>
+        val postNumberOfComments: ObservableInt
 
         val userAvatarUrl: ObservableField<String>
     }

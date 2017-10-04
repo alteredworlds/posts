@@ -1,6 +1,7 @@
 package com.example.twcgilbert.postsapp.ui.detail
 
 import android.databinding.ObservableField
+import android.databinding.ObservableInt
 import com.example.twcgilbert.postsapp.io.DataRepository
 import com.example.twcgilbert.postsapp.io.data.Post
 import com.example.twcgilbert.postsapp.io.data.imageUrl
@@ -28,7 +29,7 @@ class PostDetailActivityViewModel(
 
     override val userAvatarUrl =  ObservableField<String>(post.imageUrl)
 
-    override val postNumberOfComments = ObservableField<String>()
+    override val postNumberOfComments = ObservableInt()
 
     override fun onCreate() {
         // find number of comments
@@ -38,7 +39,7 @@ class PostDetailActivityViewModel(
                 .observeOn(androidScheduler)
                 .subscribe(
                         {
-                            postNumberOfComments.set(it.size.toString())
+                            postNumberOfComments.set(it.size)
                         },
                         {
                             view.showError(it.localizedMessage)

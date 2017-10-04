@@ -1,10 +1,9 @@
-package com.example.twcgilbert.postsapp
+package com.example.twcgilbert.postsapp.ui.posts
 
 import com.example.twcgilbert.postsapp.io.DataRepositoryFakeImpl
 import com.example.twcgilbert.postsapp.io.EmptyDataRepositoryImpl
-import com.example.twcgilbert.postsapp.ui.posts.PostsActivityContract
-import com.example.twcgilbert.postsapp.ui.posts.PostsActivityViewModel
 import io.reactivex.schedulers.TestScheduler
+import org.junit.After
 import org.junit.Rule
 import org.junit.Test
 import org.mockito.Mock
@@ -26,6 +25,12 @@ class PostActivityViewModelTests {
     private lateinit var viewModel: PostsActivityViewModel
 
     private val testScheduler = TestScheduler()
+
+    @After
+    fun cleanup() {
+        // we may as well clean up the subscriptions
+        viewModel.onDestroy()
+    }
 
     @Test
     fun testViewModel() {
@@ -72,8 +77,5 @@ class PostActivityViewModelTests {
         assertEquals(16, viewModel.posts.get().size)
         // progressVisible should now be false
         assertEquals(false, viewModel.progressVisible.get())
-
-        // we may as well clean up the subscriptions
-        viewModel.onDestroy()
     }
 }
