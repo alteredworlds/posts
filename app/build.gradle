@@ -31,15 +31,6 @@ android {
     }
 }
 
-// doesn't seem to help, so commenting out
-//android.applicationVariants.all { variant ->
-//    if (variant.buildType.name == "debug") {
-//        def aptOutputDir = new File(buildDir, "generated/source/apt/${variant.unitTestVariant.dirName}")
-//        variant.unitTestVariant.addJavaSourceFoldersToModel(aptOutputDir)
-//        assembleDebug.finalizedBy('assembleDebugUnitTest')
-//    }
-//}
-
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "com.android.support:appcompat-v7:$support_library_version"
