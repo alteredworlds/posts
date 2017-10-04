@@ -1,21 +1,18 @@
 package com.example.twcgilbert.postsapp.ui.posts
 
-import android.os.SystemClock
-import android.support.test.InstrumentationRegistry
 import android.support.test.espresso.Espresso.onView
 import android.support.test.espresso.action.ViewActions.*
+import android.support.test.espresso.assertion.ViewAssertions.matches
 import android.support.test.espresso.contrib.RecyclerViewActions.actionOnItemAtPosition
-import android.support.test.espresso.matcher.ViewMatchers.withId
+import android.support.test.espresso.matcher.ViewMatchers.*
 import android.support.test.filters.LargeTest
 import android.support.test.rule.ActivityTestRule
 import android.support.test.runner.AndroidJUnit4
-import android.support.v7.widget.RecyclerView
 import com.azimolabs.conditionwatcher.ConditionWatcher
-import com.azimolabs.conditionwatcher.Instruction
 import com.example.twcgilbert.postsapp.R
-import com.example.twcgilbert.postsapp.TestApp
+import com.example.twcgilbert.postsapp.common.ui.NonEmptyRecyclerViewInstruction
+import com.example.twcgilbert.postsapp.common.ui.RecyclerViewMatcher
 import com.example.twcgilbert.postsapp.ui.posts.adapter.PostItemViewHolder
-import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -29,46 +26,31 @@ import org.junit.runner.RunWith
 @LargeTest
 class PostsActivityTests {
 
+    fun withRecyclerView(recyclerViewId: Int): RecyclerViewMatcher {
+        return RecyclerViewMatcher(recyclerViewId)
+    }
+
     @get:Rule
     val activityTestRule = ActivityTestRule<PostsActivity>(PostsActivity::class.java)
 
-    @Before
-    fun setUp() {
-    }
 
     @Test
     fun swipePosts() {
+        val position = 3
+        val titleAtPosition = "Hi4"
+
         ConditionWatcher.waitForCondition(NonEmptyRecyclerViewInstruction())
 
         onView(withId(R.id.recyclerView)).perform(swipeUp())
 
-        SystemClock.sleep(2000)
-
         onView(withId(R.id.recyclerView)).perform(swipeDown())
 
-        SystemClock.sleep(2000)
+        onView(withRecyclerView(R.id.recyclerView).atPosition(position))
+                .check(matches(hasDescendant(withText(titleAtPosition))));
 
-        onView(withId(R.id.recyclerView)).perform(actionOnItemAtPosition<PostItemViewHolder>(3, click()))
+        onView(withId(R.id.recyclerView)).perform(actionOnItemAtPosition<PostItemViewHolder>(position, click()))
 
-        SystemClock.sleep(2000)
-    }
-
-    inner class NonEmptyRecyclerViewInstruction : Instruction() {
-        override fun getDescription() = "Wait for non-empty recyclerView"
-
-        override fun checkCondition(): Boolean {
-            var retVal = false
-            val testApp = InstrumentationRegistry.getTargetContext().applicationContext as? TestApp
-            if (null != testApp) {
-                val recyclerView = testApp.currentActivity?.findViewById<RecyclerView>(R.id.recyclerView)
-                if (null != recyclerView) {
-                    val adapter = recyclerView.adapter
-                    if (null != adapter) {
-                        retVal = adapter.itemCount > 0
-                    }
-                }
-            }
-            return retVal
-        }
+        // we should now be in the details view
+        onView(withId(R.id.postTitleTextView)).check(matches(withText(titleAtPosition)))
     }
 }

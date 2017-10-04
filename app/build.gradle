@@ -22,6 +22,16 @@ android {
         }
     }
 
+    sourceSets {
+        test {
+            java.srcDir "$projectDir/src/testShared/java"
+        }
+
+        androidTest {
+            java.srcDir "$projectDir/src/testShared/java"
+        }
+    }
+
     dataBinding {
         enabled = true
     }
