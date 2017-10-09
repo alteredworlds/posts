@@ -3,6 +3,7 @@ package com.example.twcgilbert.postsapp
 import android.app.Activity
 import android.app.Application
 import com.example.twcgilbert.postsapp.common.di.DaggerAppComponent
+import com.squareup.leakcanary.LeakCanary
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasActivityInjector
 import timber.log.Timber
@@ -17,6 +18,8 @@ open class PostsApplication : Application(), HasActivityInjector {
 
     override fun onCreate() {
         super.onCreate()
+        // memory leak detection library (NOP'd out of release builds)
+        LeakCanary.install(this);
         injectDependencies()
         setupLogger()
     }
