@@ -5,7 +5,9 @@ import android.databinding.ObservableField
 import com.example.twcgilbert.postsapp.io.DataRepository
 import com.example.twcgilbert.postsapp.io.data.Post
 import io.reactivex.Scheduler
+import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.schedulers.Schedulers
 import timber.log.Timber
 
 /**
@@ -14,8 +16,8 @@ import timber.log.Timber
 class PostsActivityViewModel(
         private val view: PostsActivityContract.View,
         private val repository: DataRepository,
-        private val ioScheduler: Scheduler,
-        private val androidScheduler: Scheduler) :
+        private val ioScheduler: Scheduler = Schedulers.io(),
+        private val androidScheduler: Scheduler = AndroidSchedulers.mainThread()) :
         PostsActivityContract.ViewModel {
 
     private val disposables = CompositeDisposable()

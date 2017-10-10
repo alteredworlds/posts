@@ -1,5 +1,6 @@
 package com.example.twcgilbert.postsapp.ui.detail.di
 
+import com.example.twcgilbert.postsapp.common.di.ActivityScope
 import com.example.twcgilbert.postsapp.io.DataRepository
 import com.example.twcgilbert.postsapp.io.data.Post
 import com.example.twcgilbert.postsapp.io.data.getPost
@@ -8,8 +9,6 @@ import com.example.twcgilbert.postsapp.ui.detail.PostDetailActivityContract
 import com.example.twcgilbert.postsapp.ui.detail.PostDetailActivityViewModel
 import dagger.Module
 import dagger.Provides
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
 
 /**
  * Created by twcgilbert on 01/10/2017.
@@ -18,19 +17,18 @@ import io.reactivex.schedulers.Schedulers
 class PostDetailActivityModule {
 
     @Provides
+    @ActivityScope
     fun providesPost(activity: PostDetailActivity): Post = activity.intent.getPost()
 
     @Provides
+    @ActivityScope
     fun providesView(activity: PostDetailActivity): PostDetailActivityContract.View = activity
 
     @Provides
+    @ActivityScope
     fun providesViewModel(
             view: PostDetailActivityContract.View,
             post: Post,
             repository: DataRepository): PostDetailActivityContract.ViewModel =
-            PostDetailActivityViewModel(view,
-                    post,
-                    repository,
-                    Schedulers.io(),
-                    AndroidSchedulers.mainThread())
+            PostDetailActivityViewModel(view, post, repository)
 }

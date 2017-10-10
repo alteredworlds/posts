@@ -6,7 +6,9 @@ import com.example.twcgilbert.postsapp.io.DataRepository
 import com.example.twcgilbert.postsapp.io.data.Post
 import com.example.twcgilbert.postsapp.io.data.imageUrl
 import io.reactivex.Scheduler
+import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.schedulers.Schedulers
 
 /**
  * Created by twcgilbert on 01/10/2017.
@@ -15,8 +17,8 @@ class PostDetailActivityViewModel(
         private val view: PostDetailActivityContract.View,
         private val post: Post,
         private val repository: DataRepository,
-        private val ioScheduler: Scheduler,
-        private val androidScheduler: Scheduler) :
+        private val ioScheduler: Scheduler = Schedulers.io(),
+        private val androidScheduler: Scheduler = AndroidSchedulers.mainThread()) :
         PostDetailActivityContract.ViewModel {
 
     private val disposables = CompositeDisposable()

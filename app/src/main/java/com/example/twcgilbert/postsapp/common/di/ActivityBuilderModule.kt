@@ -12,9 +12,11 @@ import dagger.android.ContributesAndroidInjector
  */
 @Module
 abstract class ActivityBuilderModule {
+    @ActivityScope
     @ContributesAndroidInjector(modules = arrayOf(PostsActivityModule::class))
     abstract fun bindPostsActivity(): PostsActivity
 
+    @ActivityScope
     @ContributesAndroidInjector(modules = arrayOf(PostDetailActivityModule::class))
     abstract fun bindPostDetailActivity(): PostDetailActivity
 }
