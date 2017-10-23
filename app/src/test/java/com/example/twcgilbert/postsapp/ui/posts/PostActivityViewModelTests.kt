@@ -4,6 +4,8 @@ import com.example.twcgilbert.postsapp.io.DataRepositoryImpl
 import com.example.twcgilbert.postsapp.io.PostsServiceEmpty
 import com.example.twcgilbert.postsapp.io.PostsServiceFake
 import com.example.twcgilbert.postsapp.io.PostsServiceFakeDelayed
+import com.example.twcgilbert.postsapp.io.PostsServiceFakeDelayed.companion.postsDelay
+import com.example.twcgilbert.postsapp.io.PostsServiceFakeDelayed.companion.usersDelay
 import com.example.twcgilbert.postsapp.ui.PostTestBase
 import org.junit.Rule
 import org.junit.Test
@@ -34,8 +36,8 @@ class PostActivityViewModelTests : PostTestBase() {
         viewModel = PostsActivityViewModel(
                 view,
                 DataRepositoryImpl(PostsServiceEmpty()))
-        assertEquals(0, viewModel.posts.get().size)
-        assertEquals(false, viewModel.progressVisible.get())
+
+        expectEmptyAndNotInProgress()
     }
 
     @Test
@@ -45,30 +47,23 @@ class PostActivityViewModelTests : PostTestBase() {
                 view,
                 DataRepositoryImpl(PostsServiceFake()))
 
-        assertEquals(0, viewModel.posts.get().size)
-        assertEquals(false, viewModel.progressVisible.get())
+        expectEmptyAndNotInProgress()
 
-        testScheduler.advanceTimeBy(2, TimeUnit.SECONDS)
+        testScheduler.advanceTimeTo(2, TimeUnit.SECONDS)
 
-        // we still expect zero results, no progress
-        assertEquals(0, viewModel.posts.get().size)
-        assertEquals(false, viewModel.progressVisible.get())
+        expectEmptyAndNotInProgress()
 
         // we've now called subscribe(...)
         viewModel.onCreate()
 
-        // but still expect no items, as time hasn't advanced since subscribe(...)
-        assertEquals(0, viewModel.posts.get().size)
-        // but progressVisible should now be true
-        assertEquals(true, viewModel.progressVisible.get())
+        // in progress but still no items, as time hasn't advanced since subscribe(...)
+        expectEmptyAndInProgress()
 
-        // OK, advance time
-        testScheduler.advanceTimeBy(2, TimeUnit.SECONDS)
+        // OK, advance time by tiny increment...
+        testScheduler.advanceTimeBy(1, TimeUnit.MICROSECONDS)
 
-        // we now expect to have the full test result set
-        assertEquals(16, viewModel.posts.get().size)
-        // progressVisible should now be false
-        assertEquals(false, viewModel.progressVisible.get())
+        // with no delay, we now expect results
+        expectFullAndNotInProgress()
     }
 
     @Test
@@ -78,29 +73,47 @@ class PostActivityViewModelTests : PostTestBase() {
                 view,
                 DataRepositoryImpl(PostsServiceFakeDelayed()))
 
-        assertEquals(0, viewModel.posts.get().size)
-        assertEquals(false, viewModel.progressVisible.get())
+        expectEmptyAndNotInProgress()
 
-        testScheduler.advanceTimeBy(2, TimeUnit.SECONDS)
+        // we expect zero results, no progress after moving time forward
+        testScheduler.advanceTimeTo(5, TimeUnit.HOURS)
+        expectEmptyAndNotInProgress()
 
-        // we still expect zero results, no progress
-        assertEquals(0, viewModel.posts.get().size)
-        assertEquals(false, viewModel.progressVisible.get())
+        // reset the timeline
+        testScheduler.advanceTimeTo(0, TimeUnit.SECONDS)
 
-        // we've now called subscribe(...)
+        // we've now called subscribe(...) so now 'in progress'
         viewModel.onCreate()
 
         // but still expect no items, as time hasn't advanced since subscribe(...)
+        expectEmptyAndInProgress()
+
+        // OK, advance time to 1 second
+        testScheduler.advanceTimeTo(1, TimeUnit.SECONDS)
+        expectEmptyAndInProgress()
+
+        // OK, advance time to 2 seconds
+        testScheduler.advanceTimeTo(2, TimeUnit.SECONDS)
+        expectEmptyAndInProgress()
+
+        // now to 3 seconds
+        testScheduler.advanceTimeTo(Math.max(postsDelay, usersDelay),
+                TimeUnit.SECONDS)
+        expectFullAndNotInProgress()
+    }
+
+    fun expectEmptyAndNotInProgress() {
         assertEquals(0, viewModel.posts.get().size)
-        // but progressVisible should now be true
+        assertEquals(false, viewModel.progressVisible.get())
+    }
+
+    fun expectEmptyAndInProgress() {
+        assertEquals(0, viewModel.posts.get().size)
         assertEquals(true, viewModel.progressVisible.get())
+    }
 
-        // OK, advance time
-        testScheduler.advanceTimeBy(3, TimeUnit.SECONDS)
-
-        // we now expect to have the full test result set
+    fun expectFullAndNotInProgress() {
         assertEquals(16, viewModel.posts.get().size)
-        // progressVisible should now be false
         assertEquals(false, viewModel.progressVisible.get())
     }
 }

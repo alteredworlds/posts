@@ -3,6 +3,8 @@ package com.example.twcgilbert.postsapp.ui.detail
 import com.example.twcgilbert.postsapp.io.Constants
 import com.example.twcgilbert.postsapp.io.DataRepositoryImpl
 import com.example.twcgilbert.postsapp.io.PostsServiceFake
+import com.example.twcgilbert.postsapp.io.PostsServiceFakeDelayed
+import com.example.twcgilbert.postsapp.io.PostsServiceFakeDelayed.companion.commentsDelay
 import com.example.twcgilbert.postsapp.ui.PostTestBase
 import org.junit.Rule
 import org.junit.Test
@@ -44,6 +46,32 @@ class PostDetailActivityViewModelTests : PostTestBase() {
 
         // now advance the scheduler
         testScheduler.advanceTimeBy(2, TimeUnit.SECONDS)
+
+        // we should expect one comment now
+        assertEquals(1, viewModel.postNumberOfComments.get())
+    }
+
+    @Test
+    fun testViewModelNonZeroNumberOfCommentsDelayed() {
+        viewModel = PostDetailActivityViewModel(
+                view,
+                PostsServiceFake.companion.testPost1,
+                DataRepositoryImpl(PostsServiceFakeDelayed()))
+
+        // subscribe to comments
+        viewModel.onCreate()
+
+        // we still expect 0 comments though, since scheduler hasn't advanced
+        assertEquals(0, viewModel.postNumberOfComments.get())
+
+        // now advance the scheduler
+        testScheduler.advanceTimeBy(2, TimeUnit.SECONDS)
+
+        // we still expect 0 comments though, since scheduler hasn't advanced ENOUGH
+        assertEquals(0, viewModel.postNumberOfComments.get())
+
+        // now advance the scheduler
+        testScheduler.advanceTimeTo(commentsDelay, TimeUnit.SECONDS)
 
         // we should expect one comment now
         assertEquals(1, viewModel.postNumberOfComments.get())
