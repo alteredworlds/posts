@@ -2,8 +2,7 @@ package com.example.twcgilbert.postsapp.ui.posts
 
 import com.example.twcgilbert.postsapp.io.DataRepositoryFakeImpl
 import com.example.twcgilbert.postsapp.io.EmptyDataRepositoryImpl
-import io.reactivex.schedulers.TestScheduler
-import org.junit.After
+import com.example.twcgilbert.postsapp.ui.PostTestBase
 import org.junit.Rule
 import org.junit.Test
 import org.mockito.Mock
@@ -11,11 +10,10 @@ import org.mockito.junit.MockitoJUnit
 import java.util.concurrent.TimeUnit
 import kotlin.test.assertEquals
 
-
 /**
- * Created by twcgilbert on 02/10/2017.
+ * Created by twcgilbert on 23/10/2017.
  */
-class PostActivityViewModelTests {
+class PostActivityViewModelTests : PostTestBase() {
 
     @get:Rule
     var mockitoRule = MockitoJUnit.rule()
@@ -24,11 +22,7 @@ class PostActivityViewModelTests {
 
     private lateinit var viewModel: PostsActivityViewModel
 
-    private val testScheduler = TestScheduler()
-
-    @After
-    fun cleanup() {
-        // we may as well clean up the subscriptions
+    override fun cleanup() {
         viewModel.onDestroy()
     }
 
@@ -37,9 +31,7 @@ class PostActivityViewModelTests {
 
         viewModel = PostsActivityViewModel(
                 view,
-                EmptyDataRepositoryImpl(),
-                testScheduler,
-                testScheduler)
+                EmptyDataRepositoryImpl())
         assertEquals(0, viewModel.posts.get().size)
         assertEquals(false, viewModel.progressVisible.get())
     }
@@ -49,9 +41,7 @@ class PostActivityViewModelTests {
 
         viewModel = PostsActivityViewModel(
                 view,
-                DataRepositoryFakeImpl(),
-                testScheduler,
-                testScheduler)
+                DataRepositoryFakeImpl())
 
         assertEquals(0, viewModel.posts.get().size)
         assertEquals(false, viewModel.progressVisible.get())

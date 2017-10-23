@@ -6,7 +6,7 @@ import io.reactivex.Observable
 /**
  * Created by twcgilbert on 02/10/2017.
  */
-class DataRepositoryFakeImpl : DataRepository {
+open class DataRepositoryFakeImpl : DataRepository {
     object companion {
         const val userId1 = 1
         @JvmStatic

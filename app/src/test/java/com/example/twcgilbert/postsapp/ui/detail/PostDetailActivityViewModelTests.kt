@@ -1,12 +1,8 @@
-package com.example.twcgilbert.postsapp.ui.posts
+package com.example.twcgilbert.postsapp.ui.detail
 
 import com.example.twcgilbert.postsapp.io.Constants
 import com.example.twcgilbert.postsapp.io.DataRepositoryFakeImpl
-import com.example.twcgilbert.postsapp.io.DataRepositoryFakeImpl.companion
-import com.example.twcgilbert.postsapp.ui.detail.PostDetailActivityContract
-import com.example.twcgilbert.postsapp.ui.detail.PostDetailActivityViewModel
-import io.reactivex.schedulers.TestScheduler
-import org.junit.After
+import com.example.twcgilbert.postsapp.ui.PostTestBase
 import org.junit.Rule
 import org.junit.Test
 import org.mockito.Mock
@@ -14,11 +10,10 @@ import org.mockito.junit.MockitoJUnit
 import java.util.concurrent.TimeUnit
 import kotlin.test.assertEquals
 
-
 /**
- * Created by twcgilbert on 02/10/2017.
+ * Created by twcgilbert on 23/10/2017.
  */
-class PostDetailActivityViewModelTests {
+class PostDetailActivityViewModelTests : PostTestBase() {
 
     @get:Rule
     var mockitoRule = MockitoJUnit.rule()
@@ -27,10 +22,7 @@ class PostDetailActivityViewModelTests {
 
     private lateinit var viewModel: PostDetailActivityViewModel
 
-    private val testScheduler = TestScheduler()
-
-    @After
-    fun cleanup() {
+    override fun cleanup() {
         viewModel.onDestroy()
     }
 
@@ -76,17 +68,15 @@ class PostDetailActivityViewModelTests {
     fun runViewModel1Tests() {
         viewModel = PostDetailActivityViewModel(
                 view,
-                companion.testPost1,
-                DataRepositoryFakeImpl(),
-                testScheduler,
-                testScheduler)
-        assertEquals(companion.post1Title, viewModel.postTitle.get())
-        assertEquals(companion.post1Body, viewModel.postBody.get())
-        assertEquals(companion.userId1Username, viewModel.postUserName.get())
+                DataRepositoryFakeImpl.companion.testPost1,
+                DataRepositoryFakeImpl())
+        assertEquals(DataRepositoryFakeImpl.companion.post1Title, viewModel.postTitle.get())
+        assertEquals(DataRepositoryFakeImpl.companion.post1Body, viewModel.postBody.get())
+        assertEquals(DataRepositoryFakeImpl.companion.userId1Username, viewModel.postUserName.get())
 
         // Constants.ADORABLE_URL + userEmail + Constants.IMAGE_EXTENSION
         assertEquals(
-                Constants.ADORABLE_URL + companion.userId1Email + Constants.IMAGE_EXTENSION,
+                Constants.ADORABLE_URL + DataRepositoryFakeImpl.companion.userId1Email + Constants.IMAGE_EXTENSION,
                 viewModel.userAvatarUrl.get())
         assertEquals(0, viewModel.postNumberOfComments.get())
     }
@@ -94,17 +84,15 @@ class PostDetailActivityViewModelTests {
     fun runViewModel2Tests() {
         viewModel = PostDetailActivityViewModel(
                 view,
-                companion.testPost2,
-                DataRepositoryFakeImpl(),
-                testScheduler,
-                testScheduler)
-        assertEquals(companion.post2Title, viewModel.postTitle.get())
-        assertEquals(companion.post2Body, viewModel.postBody.get())
-        assertEquals(companion.userId2Username, viewModel.postUserName.get())
+                DataRepositoryFakeImpl.companion.testPost2,
+                DataRepositoryFakeImpl())
+        assertEquals(DataRepositoryFakeImpl.companion.post2Title, viewModel.postTitle.get())
+        assertEquals(DataRepositoryFakeImpl.companion.post2Body, viewModel.postBody.get())
+        assertEquals(DataRepositoryFakeImpl.companion.userId2Username, viewModel.postUserName.get())
 
         // Constants.ADORABLE_URL + userEmail + Constants.IMAGE_EXTENSION
         assertEquals(
-                Constants.ADORABLE_URL + companion.userId2Email + Constants.IMAGE_EXTENSION,
+                Constants.ADORABLE_URL + DataRepositoryFakeImpl.companion.userId2Email + Constants.IMAGE_EXTENSION,
                 viewModel.userAvatarUrl.get())
         assertEquals(0, viewModel.postNumberOfComments.get())
     }
