@@ -1,7 +1,8 @@
 package com.example.twcgilbert.postsapp.ui.posts
 
-import com.example.twcgilbert.postsapp.io.DataRepositoryFakeImpl
-import com.example.twcgilbert.postsapp.io.EmptyDataRepositoryImpl
+import com.example.twcgilbert.postsapp.io.DataRepositoryImpl
+import com.example.twcgilbert.postsapp.io.PostsServiceEmpty
+import com.example.twcgilbert.postsapp.io.PostsServiceFake
 import com.example.twcgilbert.postsapp.ui.PostTestBase
 import org.junit.Rule
 import org.junit.Test
@@ -31,7 +32,7 @@ class PostActivityViewModelTests : PostTestBase() {
 
         viewModel = PostsActivityViewModel(
                 view,
-                EmptyDataRepositoryImpl())
+                DataRepositoryImpl(PostsServiceEmpty()))
         assertEquals(0, viewModel.posts.get().size)
         assertEquals(false, viewModel.progressVisible.get())
     }
@@ -41,7 +42,7 @@ class PostActivityViewModelTests : PostTestBase() {
 
         viewModel = PostsActivityViewModel(
                 view,
-                DataRepositoryFakeImpl())
+                DataRepositoryImpl(PostsServiceFake()))
 
         assertEquals(0, viewModel.posts.get().size)
         assertEquals(false, viewModel.progressVisible.get())

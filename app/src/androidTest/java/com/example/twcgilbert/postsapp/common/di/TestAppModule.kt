@@ -1,7 +1,8 @@
 package com.example.twcgilbert.postsapp.common.di
 
 import com.example.twcgilbert.postsapp.io.DataRepository
-import com.example.twcgilbert.postsapp.io.DataRepositoryFakeImpl
+import com.example.twcgilbert.postsapp.io.DataRepositoryImpl
+import com.example.twcgilbert.postsapp.io.PostsServiceFake
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
@@ -15,6 +16,6 @@ class TestAppModule {
     @Provides
     @Singleton
     fun provideDataRepository(): DataRepository {
-        return DataRepositoryFakeImpl()
+        return DataRepositoryImpl(PostsServiceFake())
     }
 }

@@ -1,7 +1,8 @@
 package com.example.twcgilbert.postsapp.ui.detail
 
 import com.example.twcgilbert.postsapp.io.Constants
-import com.example.twcgilbert.postsapp.io.DataRepositoryFakeImpl
+import com.example.twcgilbert.postsapp.io.DataRepositoryImpl
+import com.example.twcgilbert.postsapp.io.PostsServiceFake
 import com.example.twcgilbert.postsapp.ui.PostTestBase
 import org.junit.Rule
 import org.junit.Test
@@ -68,15 +69,15 @@ class PostDetailActivityViewModelTests : PostTestBase() {
     fun runViewModel1Tests() {
         viewModel = PostDetailActivityViewModel(
                 view,
-                DataRepositoryFakeImpl.companion.testPost1,
-                DataRepositoryFakeImpl())
-        assertEquals(DataRepositoryFakeImpl.companion.post1Title, viewModel.postTitle.get())
-        assertEquals(DataRepositoryFakeImpl.companion.post1Body, viewModel.postBody.get())
-        assertEquals(DataRepositoryFakeImpl.companion.userId1Username, viewModel.postUserName.get())
+                PostsServiceFake.companion.testPost1,
+                DataRepositoryImpl(PostsServiceFake()))
+        assertEquals(PostsServiceFake.companion.post1Title, viewModel.postTitle.get())
+        assertEquals(PostsServiceFake.companion.post1Body, viewModel.postBody.get())
+        assertEquals(PostsServiceFake.companion.userId1Username, viewModel.postUserName.get())
 
         // Constants.ADORABLE_URL + userEmail + Constants.IMAGE_EXTENSION
         assertEquals(
-                Constants.ADORABLE_URL + DataRepositoryFakeImpl.companion.userId1Email + Constants.IMAGE_EXTENSION,
+                Constants.ADORABLE_URL + PostsServiceFake.companion.userId1Email + Constants.IMAGE_EXTENSION,
                 viewModel.userAvatarUrl.get())
         assertEquals(0, viewModel.postNumberOfComments.get())
     }
@@ -84,15 +85,15 @@ class PostDetailActivityViewModelTests : PostTestBase() {
     fun runViewModel2Tests() {
         viewModel = PostDetailActivityViewModel(
                 view,
-                DataRepositoryFakeImpl.companion.testPost2,
-                DataRepositoryFakeImpl())
-        assertEquals(DataRepositoryFakeImpl.companion.post2Title, viewModel.postTitle.get())
-        assertEquals(DataRepositoryFakeImpl.companion.post2Body, viewModel.postBody.get())
-        assertEquals(DataRepositoryFakeImpl.companion.userId2Username, viewModel.postUserName.get())
+                PostsServiceFake.companion.testPost2,
+                DataRepositoryImpl(PostsServiceFake()))
+        assertEquals(PostsServiceFake.companion.post2Title, viewModel.postTitle.get())
+        assertEquals(PostsServiceFake.companion.post2Body, viewModel.postBody.get())
+        assertEquals(PostsServiceFake.companion.userId2Username, viewModel.postUserName.get())
 
         // Constants.ADORABLE_URL + userEmail + Constants.IMAGE_EXTENSION
         assertEquals(
-                Constants.ADORABLE_URL + DataRepositoryFakeImpl.companion.userId2Email + Constants.IMAGE_EXTENSION,
+                Constants.ADORABLE_URL + PostsServiceFake.companion.userId2Email + Constants.IMAGE_EXTENSION,
                 viewModel.userAvatarUrl.get())
         assertEquals(0, viewModel.postNumberOfComments.get())
     }

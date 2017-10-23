@@ -1,16 +1,17 @@
 package com.example.twcgilbert.postsapp.io
 
 import com.example.twcgilbert.postsapp.io.data.Comment
-import com.example.twcgilbert.postsapp.io.data.Post
+import com.example.twcgilbert.postsapp.io.data.SimplePost
 import com.example.twcgilbert.postsapp.io.data.User
+import com.example.twcgilbert.postsapp.io.network.PostsService
 import io.reactivex.Observable
 
 /**
- * Created by twcgilbert on 02/10/2017.
+ * Created by twcgilbert on 23/10/2017.
  */
-class EmptyDataRepositoryImpl : DataRepository {
-    override fun getPosts(): Observable<List<Post>> {
-        return Observable.just(ArrayList<Post>())
+class PostsServiceEmpty : PostsService {
+    override fun getPosts(): Observable<List<SimplePost>> {
+        return Observable.just(ArrayList<SimplePost>())
     }
 
     override fun getUsers(): Observable<List<User>> {
