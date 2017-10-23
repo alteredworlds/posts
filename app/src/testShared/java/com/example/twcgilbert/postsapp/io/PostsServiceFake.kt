@@ -7,7 +7,7 @@ import io.reactivex.Observable
 /**
  * Created by twcgilbert on 23/10/2017.
  */
-class PostsServiceFake : PostsService {
+open class PostsServiceFake : PostsService {
     object companion {
         const val userId1 = 1
         @JvmStatic
