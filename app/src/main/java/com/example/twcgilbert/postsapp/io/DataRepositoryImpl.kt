@@ -18,7 +18,7 @@ class DataRepositoryImpl(private var api: PostsService) : DataRepository {
                 .zipWith(getUsers(), BiFunction { posts, users ->
                     val resultList = ArrayList<Post>(posts.size)
                     for (post in posts) {
-                        val user = users.filter { it.id == post.userId }.single()
+                        val user = users.single{ it.id == post.userId }
                         resultList.add(Post(
                                 post.userId,
                                 post.id,
