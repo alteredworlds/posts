@@ -3,7 +3,6 @@ package com.example.twcgilbert.postsapp.ui.posts.adapter
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import com.example.twcgilbert.postsapp.BR
 import com.example.twcgilbert.postsapp.common.ui.AdapterItemClick
 import com.example.twcgilbert.postsapp.databinding.PostItemBinding
 import com.example.twcgilbert.postsapp.io.data.Post
@@ -29,11 +28,7 @@ class PostsAdapter(private val onPostClicked: PostsActivityContract.PostClicked?
     }
 
     override fun onBindViewHolder(holder: PostItemViewHolder, position: Int) {
-        holder.update(items[position])
-
-        val binding = holder.binding
-        binding.setVariable(BR.viewModel, holder)
-        binding.executePendingBindings()
+        holder.bindAndExecutePending(items[position]);
     }
 
     override fun onItemClick(position: Int) {

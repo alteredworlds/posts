@@ -4,6 +4,7 @@ import android.databinding.ObservableField
 import android.databinding.ViewDataBinding
 import android.support.v7.widget.RecyclerView
 import android.view.View
+import com.example.twcgilbert.postsapp.BR
 import com.example.twcgilbert.postsapp.common.ui.AdapterItemClick
 import com.example.twcgilbert.postsapp.io.data.Post
 import com.example.twcgilbert.postsapp.io.data.imageUrl
@@ -11,7 +12,9 @@ import com.example.twcgilbert.postsapp.io.data.imageUrl
 /**
  * Created by twcgilbert on 01/10/2017.
  */
-class PostItemViewHolder(val binding: ViewDataBinding, val itemClick: AdapterItemClick?) :
+class PostItemViewHolder(
+        private val binding: ViewDataBinding,
+        private val itemClick: AdapterItemClick?) :
         RecyclerView.ViewHolder(binding.root),
         PostItemContract {
 
@@ -23,7 +26,16 @@ class PostItemViewHolder(val binding: ViewDataBinding, val itemClick: AdapterIte
         itemClick?.onItemClick(adapterPosition)
     }
 
-    fun update(postItem: Post) {
+    fun bindAndExecutePending(postItem: Post) {
+        // transfer the data
+        update(postItem)
+        // bind to this instance (acting as ViewModel for the list item)
+        binding.setVariable(BR.viewModel, this)
+        // ensure updated ASAP
+        binding.executePendingBindings()
+    }
+
+    private fun update(postItem: Post) {
         title.set(postItem.title)
         userAvatarUrl.set(postItem.imageUrl)
     }
