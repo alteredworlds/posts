@@ -2,8 +2,7 @@ package com.example.twcgilbert.postsapp.ui.posts
 
 import android.databinding.ObservableBoolean
 import android.databinding.ObservableField
-import com.example.twcgilbert.postsapp.common.ui.BaseActivityContract
-import com.example.twcgilbert.postsapp.common.ui.BaseViewModelContract
+import com.example.twcgilbert.postsapp.common.ui.BaseContract
 import com.example.twcgilbert.postsapp.io.data.Post
 
 /**
@@ -16,12 +15,12 @@ interface PostsActivityContract {
         fun onPostClicked(post: Post)
     }
 
-    interface View : BaseActivityContract.View {
+    interface View : BaseContract.View {
 
         fun navigateForPost(post: Post)
     }
 
-    interface ViewModel : BaseViewModelContract.ViewModel, PostsActivityContract.PostClicked {
+    interface ViewModel : BaseContract.ViewModel, PostClicked {
 
         val posts: ObservableField<List<Post>>
 

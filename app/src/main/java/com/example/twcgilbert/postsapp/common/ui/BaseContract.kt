@@ -1,9 +1,14 @@
 package com.example.twcgilbert.postsapp.common.ui
 
 /**
- * Created by twcgilbert on 01/10/2017.
+ * Created by twcgilbert on 23/11/2017.
  */
-interface BaseViewModelContract {
+interface BaseContract {
+
+    interface View {
+
+        fun showError(message: String)
+    }
 
     interface ViewModel {
 
