@@ -3,7 +3,7 @@
 buildscript {
     ext {
         gradle_plugin_version = '3.0.1'
-        kotlin_version = '1.1.60'
+        kotlin_version = '1.2.0'
         support_library_version = '26.1.0'
         constraint_layout_version = '1.0.2'
 
