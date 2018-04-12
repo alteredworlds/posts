@@ -103,17 +103,17 @@ class PostActivityViewModelTests : PostTestBase() {
     }
 
     fun expectEmptyAndNotInProgress() {
-        assertEquals(0, viewModel.posts.get().size)
+        assertEquals(0, viewModel.posts.get()?.size)
         assertEquals(false, viewModel.progressVisible.get())
     }
 
     fun expectEmptyAndInProgress() {
-        assertEquals(0, viewModel.posts.get().size)
+        assertEquals(0, viewModel.posts.get()?.size)
         assertEquals(true, viewModel.progressVisible.get())
     }
 
     fun expectFullAndNotInProgress() {
-        assertEquals(16, viewModel.posts.get().size)
+        assertEquals(16, viewModel.posts.get()?.size)
         assertEquals(false, viewModel.progressVisible.get())
     }
 }

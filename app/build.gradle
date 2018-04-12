@@ -11,8 +11,8 @@ android {
         applicationId "com.example.twcgilbert.myapplication"
         minSdkVersion min_sdk_version
         targetSdkVersion target_sdk_version
-        versionCode 1
-        versionName "1.0"
+        versionCode version_code
+        versionName version_name
         testInstrumentationRunner "com.example.twcgilbert.postsapp.PostsTestRunner"
     }
 
@@ -40,6 +40,11 @@ android {
     androidExtensions {
         experimental = true
     }
+
+    lintOptions {
+        abortOnError false
+        checkReleaseBuilds false
+    }
 }
 
 dependencies {
@@ -48,10 +53,9 @@ dependencies {
     implementation "com.android.support:recyclerview-v7:$support_library_version"
     implementation "com.android.support.constraint:constraint-layout:$constraint_layout_version"
     implementation "com.android.support:support-v4:$support_library_version"
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
 
     // annotation processing for normal builds
-    kapt "com.android.databinding:compiler:$gradle_plugin_version"
     kapt "com.google.dagger:dagger-compiler:$dagger_version"
     kapt "com.google.dagger:dagger-android-processor:$dagger_version"
 
@@ -63,7 +67,7 @@ dependencies {
     implementation "com.google.dagger:dagger-android:$dagger_version"
     implementation "com.google.dagger:dagger-android-support:$dagger_version"
 
-    // http calls
+    // Retrofit
     implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
     implementation "com.squareup.retrofit2:converter-gson:$retrofit_version"
     implementation "com.squareup.retrofit2:adapter-rxjava2:$retrofit_version"
@@ -88,7 +92,6 @@ dependencies {
     testImplementation "com.squareup.leakcanary:leakcanary-android-no-op:$leak_canary_version"
 
     // LOCAL UNIT TESTS: annotation processing
-    kaptTest "com.android.databinding:compiler:$gradle_plugin_version"
     kaptTest "com.google.dagger:dagger-compiler:$dagger_version"
     kaptTest "com.google.dagger:dagger-android-processor:$dagger_version"
 
@@ -114,6 +117,5 @@ dependencies {
 
     // ANDROID UNIT TESTS: annotation processing
     kaptAndroidTest "com.google.dagger:dagger-compiler:$dagger_version"
-    kaptAndroidTest "com.google.dagger:dagger-android-processor:$dagger_version"
     kaptAndroidTest "com.google.dagger:dagger-android-processor:$dagger_version"
 }
