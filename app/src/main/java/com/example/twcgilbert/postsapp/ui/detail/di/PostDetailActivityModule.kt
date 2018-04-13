@@ -1,6 +1,6 @@
 package com.example.twcgilbert.postsapp.ui.detail.di
 
-import com.example.twcgilbert.postsapp.repo.di.ActivityScope
+import com.example.twcgilbert.postsapp.common.di.ActivityScope
 import com.example.twcgilbert.postsapp.repo.DataRepository
 import com.example.twcgilbert.postsapp.repo.data.Post
 import com.example.twcgilbert.postsapp.repo.data.getPost

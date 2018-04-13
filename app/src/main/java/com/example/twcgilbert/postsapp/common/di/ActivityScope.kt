@@ -1,4 +1,4 @@
-package com.example.twcgilbert.postsapp.repo.di
+package com.example.twcgilbert.postsapp.common.di
 
 import javax.inject.Scope
 
