@@ -1,0 +1,140 @@
+version: 2
+
+references:
+# ----------------------------
+# Cache Configuration
+# ----------------------------
+  cache_key: &cache_key
+    key: cache-{{ checksum "gradle/wrapper/gradle-wrapper.properties" }}-{{ checksum "build.gradle" }}-{{ checksum "app/build.gradle" }}
+  restore_dependency_cache: &restore_dependency_cache
+    restore_cache:
+      <<: *cache_key
+  save_dependency_cache: &save_dependency_cache
+    save_cache:
+      <<: *cache_key
+      paths:
+        - ~/.gradle
+        - ~/.m2
+
+# ----------------------------
+# Docker Configuration
+# ----------------------------
+  android_config: &android_config
+    working_directory: ~/code
+    docker:
+      - image: circleci/android:api-27-alpha
+    environment:
+      JVM_OPTS: -Xmx3g
+      GRADLE_OPTS: '-Dorg.gradle.daemon=false -Dorg.gradle.jvmargs="-Xmx2g -XX:MaxPermSize=512m -XX:+HeapDumpOnOutOfMemoryError" -Dkotlin.compiler.execution.strategy=“in-process” -Dkotlin.daemon.jvm.options=-Xmx2g'
+
+  # Workspace
+  workspace: &workspace
+    ~/code
+
+jobs:
+
+## Build debug APK
+  build_debug:
+    <<: *android_config
+    steps:
+      - checkout
+      - *restore_dependency_cache
+      - run:
+          name: Download dependencies
+          command: ./gradlew androidDependencies  --no-daemon
+      - *save_dependency_cache
+      - run:
+          name: Gradle build (debug)
+          command: ./gradlew assembleDebug --no-daemon  -Pkotlin.incremental=false
+      - store_artifacts:
+          path: app/build/outputs/apk/
+          destination: /apk/
+
+  ## Run Lint and Unit Tests
+  test_unit:
+    <<: *android_config
+    steps:
+      - checkout
+      - *restore_dependency_cache
+      - run:
+          name: Download dependencies
+          command: ./gradlew androidDependencies --no-daemon
+      - *save_dependency_cache
+      - run:
+          name: Run Lint and Tests
+          command: ./gradlew lintDebug testDebugUnitTest -Pkotlin.incremental=false
+      - store_artifacts:
+          path: app/build/reports/
+          destination: /reports/
+      - store_test_results:
+          path: app/build/test-results/
+          destination: /test-results/
+
+  ## Run instrumented tests
+  test_instrumented:
+    <<: *android_config
+    steps:
+      - checkout
+      - *restore_dependency_cache
+      - run:
+          name: Download dependencies
+          command: ./gradlew androidDependencies --no-daemon
+      - *save_dependency_cache
+      - run:
+          name: Gradle build (debug)
+          command: ./gradlew assembleDebug --no-daemon  -Pkotlin.incremental=false
+      - run:
+          name: Gradle build (debugAndroidTest)
+          command: ./gradlew assembleDebugAndroidTest --no-daemon  -Pkotlin.incremental=false
+      - run:
+          name: Install AWS CLI
+          command: sudo apt-get -y -qq install awscli
+      - run:
+          name: AWS S3 get gcloud credentials
+          command: |
+            mkdir tmp
+            aws s3 cp s3://aw.credentials/posts-firebase-adminsdk.json tmp --region eu-west-1
+      - run:
+          name: Set Google Cloud target project
+          command: gcloud config set project posts-ec5bf
+      - run:
+          name: Authenticate with Google Cloud
+          command: gcloud auth activate-service-account firebase-adminsdk-6nvpz@posts-ec5bf.iam.gserviceaccount.com --key-file tmp/posts-firebase-adminsdk.json
+      - run:
+          name: Run instrumented test on Firebase Test Lab
+          command: gcloud firebase test android run --type instrumentation --app app/build/outputs/apk/debug/app-debug.apk --test app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk --device model=Nexus6P,version=27,locale=en_US,orientation=portrait --environment-variables coverage=true,coverageFile=/sdcard/tmp/code-coverage/connected/coverage.ec --directories-to-pull=/sdcard/tmp --timeout 20m
+      - run:
+          name: Create directory to store test results
+          command: mkdir firebase
+      - run:
+          name: Download instrumented test results from Firebase Test Lab
+          command: gsutil -o GSUtil:check_hashes=always -m cp -r -U "`gsutil ls gs://test-lab-b64ccd6zby2x4-hujuk39b363d2 | tail -1`*" ~/code/firebase/
+      - store_artifacts:
+          path: firebase/
+          destination: /firebase/
+
+# see https://circleci.com/docs/2.0/workflows/#git-tag-job-execution
+# goal is to BUILD & TEST for all branches & all tags
+#         to DEPLOY only for tags against master marked with a version number
+workflows:
+  version: 2
+  all_flavours:
+    jobs:
+      - build_debug:
+          filters:
+            tags:
+              only: /.*/
+
+      - test_unit:
+          filters:
+            tags:
+              only: /.*
+          requires:
+            - build_debug
+
+      - test_instrumented:
+          filters:
+            tags:
+              only: /.*
+          requires:
+            - test_unit
