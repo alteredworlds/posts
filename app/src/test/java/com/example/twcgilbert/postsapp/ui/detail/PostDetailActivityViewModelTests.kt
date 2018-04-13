@@ -1,6 +1,5 @@
 package com.example.twcgilbert.postsapp.ui.detail
 
-import com.example.twcgilbert.postsapp.repo.Constants
 import com.example.twcgilbert.postsapp.repo.DataRepositoryImpl
 import com.example.twcgilbert.postsapp.repo.PostsServiceFake
 import com.example.twcgilbert.postsapp.repo.PostsServiceFakeDelayed
@@ -101,11 +100,7 @@ class PostDetailActivityViewModelTests : PostTestBase() {
         assertEquals(PostsServiceFake.post1Title, viewModel.postTitle.get())
         assertEquals(PostsServiceFake.post1Body, viewModel.postBody.get())
         assertEquals(PostsServiceFake.userId1Username, viewModel.postUserName.get())
-
-        // Constants.ADORABLE_URL + userEmail + Constants.IMAGE_EXTENSION
-        assertEquals(
-                Constants.ADORABLE_URL + PostsServiceFake.userId1Email + Constants.IMAGE_EXTENSION,
-                viewModel.userAvatarUrl.get())
+        assertEquals(PostsServiceFake.userId1AvatarUrl, viewModel.userAvatarUrl.get())
         assertEquals(0, viewModel.postNumberOfComments.get())
     }
 
@@ -117,11 +112,7 @@ class PostDetailActivityViewModelTests : PostTestBase() {
         assertEquals(PostsServiceFake.post2Title, viewModel.postTitle.get())
         assertEquals(PostsServiceFake.post2Body, viewModel.postBody.get())
         assertEquals(PostsServiceFake.userId2Username, viewModel.postUserName.get())
-
-        // Constants.ADORABLE_URL + userEmail + Constants.IMAGE_EXTENSION
-        assertEquals(
-                Constants.ADORABLE_URL + PostsServiceFake.userId2Email + Constants.IMAGE_EXTENSION,
-                viewModel.userAvatarUrl.get())
+        assertEquals(PostsServiceFake.userId2AvatarUrl, viewModel.userAvatarUrl.get())
         assertEquals(0, viewModel.postNumberOfComments.get())
     }
 }

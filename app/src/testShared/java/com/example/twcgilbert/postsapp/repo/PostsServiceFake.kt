@@ -5,7 +5,7 @@ import com.example.twcgilbert.postsapp.repo.data.Post
 import com.example.twcgilbert.postsapp.repo.data.SimplePost
 import com.example.twcgilbert.postsapp.repo.data.User
 import com.example.twcgilbert.postsapp.repo.network.PostsService
-import io.reactivex.Observable
+import io.reactivex.Single
 
 /**
  * Created by twcgilbert on 23/10/2017.
@@ -15,12 +15,16 @@ open class PostsServiceFake : PostsService {
     companion object {
 
         const val userId1 = 1
+        const val userId1Name = "Tom"
         const val userId1Username = "Username1"
         const val userId1Email = "test1@test.com"
+        val userId1AvatarUrl = PostsService.getImageUrl(userId1Email)
 
         const val userId2 = 2
+        const val userId2Name = "Tim"
         const val userId2Username = "Username2"
         const val userId2Email = "test2@test.com"
+        val userId2AvatarUrl = PostsService.getImageUrl(userId2Email)
 
         const val postId1 = 1
         const val post1Title = "Hi1"
@@ -48,7 +52,8 @@ open class PostsServiceFake : PostsService {
                 post1Title,
                 post1Body,
                 userId1Username,
-                userId1Email)
+                userId1Email,
+                userId1AvatarUrl)
 
         @JvmStatic
         val testPost2 = Post(userId2,
@@ -56,10 +61,11 @@ open class PostsServiceFake : PostsService {
                 post2Title,
                 post2Body,
                 userId2Username,
-                userId2Email)
+                userId2Email,
+                userId2AvatarUrl)
     }
 
-    override fun getPosts(): Observable<List<SimplePost>> {
+    override fun getPosts(): Single<List<SimplePost>> {
         val posts = arrayListOf(
                 testSimplePost1,
                 testSimplePost2,
@@ -78,24 +84,24 @@ open class PostsServiceFake : PostsService {
                 SimplePost(userId2, 15, "Hi15", "Body"),
                 SimplePost(userId2, 16, "Hi16", "Body")
         )
-        return Observable.just(posts)
+        return Single.just(posts)
     }
 
-    override fun getUsers(): Observable<List<User>> {
+    override fun getUsers(): Single<List<User>> {
         val users = arrayListOf(
                 User(userId1,
-                        "Tom",
+                        userId1Name,
                         userId1Username,
                         userId1Email),
                 User(userId2,
-                        "Tim",
+                        userId2Name,
                         userId2Username,
                         userId2Email)
         )
-        return Observable.just(users)
+        return Single.just(users)
     }
 
-    override fun getComments(postId: Int): Observable<List<Comment>> {
+    override fun getComments(postId: Int): Single<List<Comment>> {
         val comments = arrayListOf(
                 Comment(postId1,
                         1,
@@ -103,6 +109,6 @@ open class PostsServiceFake : PostsService {
                         "fred@fred.com",
                         "Body1")
         )
-        return Observable.just(comments.filter { it.postId == postId })
+        return Single.just(comments.filter { it.postId == postId })
     }
 }

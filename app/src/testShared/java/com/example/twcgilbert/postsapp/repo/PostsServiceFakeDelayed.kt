@@ -3,8 +3,7 @@ package com.example.twcgilbert.postsapp.repo
 import com.example.twcgilbert.postsapp.repo.data.Comment
 import com.example.twcgilbert.postsapp.repo.data.SimplePost
 import com.example.twcgilbert.postsapp.repo.data.User
-import io.reactivex.Observable
-import io.reactivex.functions.BiFunction
+import io.reactivex.Single
 import java.util.concurrent.TimeUnit
 
 /**
@@ -18,21 +17,18 @@ class PostsServiceFakeDelayed : PostsServiceFake() {
         const val commentsDelay = 6L
     }
 
-    override fun getPosts(): Observable<List<SimplePost>> {
-        return Observable
-                .interval(postsDelay, TimeUnit.SECONDS)
-                .zipWith(super.getPosts(), BiFunction { tick, posts -> posts })
+    override fun getPosts(): Single<List<SimplePost>> {
+        return super.getPosts()
+                .delay(postsDelay, TimeUnit.SECONDS)
     }
 
-    override fun getUsers(): Observable<List<User>> {
-        return Observable
-                .interval(usersDelay, TimeUnit.SECONDS)
-                .zipWith(super.getUsers(), BiFunction { tick, users -> users })
+    override fun getUsers(): Single<List<User>> {
+        return super.getUsers()
+                .delay(usersDelay, TimeUnit.SECONDS)
     }
 
-    override fun getComments(postId: Int): Observable<List<Comment>> {
-        return Observable
-                .interval(commentsDelay, TimeUnit.SECONDS)
-                .zipWith(super.getComments(postId), BiFunction { tick, comments -> comments })
+    override fun getComments(postId: Int): Single<List<Comment>> {
+        return super.getComments(postId)
+                .delay(commentsDelay, TimeUnit.SECONDS)
     }
 }

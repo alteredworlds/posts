@@ -3,7 +3,6 @@ package com.example.twcgilbert.postsapp.repo.data
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Parcelable
-import com.example.twcgilbert.postsapp.repo.Constants
 import kotlinx.android.parcel.Parcelize
 
 /**
@@ -17,11 +16,9 @@ data class Post(
         val title: String?,
         val body: String?,
         val userName: String?,
-        val userEmail: String?
+        val userEmail: String?,
+        val imageUrl: String?
 ) : Parcelable
-
-val Post.imageUrl: String
-    get() = Constants.ADORABLE_URL + userEmail + Constants.IMAGE_EXTENSION
 
 fun Intent.putPost(post: Post) = putExtra(Intent.EXTRA_REFERRER, post)
 

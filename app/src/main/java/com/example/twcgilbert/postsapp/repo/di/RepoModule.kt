@@ -1,7 +1,6 @@
 package com.example.twcgilbert.postsapp.repo.di
 
 import android.app.Application
-import com.example.twcgilbert.postsapp.repo.Constants
 import com.example.twcgilbert.postsapp.repo.DataRepository
 import com.example.twcgilbert.postsapp.repo.DataRepositoryImpl
 import com.example.twcgilbert.postsapp.repo.network.NetworkMonitorInterceptor
@@ -43,7 +42,7 @@ class RepoModule {
                 .build()
 
         val retrofit = Retrofit.Builder()
-                .baseUrl(Constants.BASE_URL)
+                .baseUrl(PostsService.BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .client(httpClient)

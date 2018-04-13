@@ -2,7 +2,7 @@ package com.example.twcgilbert.postsapp.repo
 
 import com.example.twcgilbert.postsapp.repo.data.Post
 import com.example.twcgilbert.postsapp.repo.network.PostsService
-import io.reactivex.Observable
+import io.reactivex.Single
 import io.reactivex.functions.BiFunction
 
 /**
@@ -12,22 +12,20 @@ class DataRepositoryImpl(private var api: PostsService) : DataRepository {
 
     override fun getUsers() = api.getUsers().cache()
 
-    override fun getPosts(): Observable<List<Post>> = api
+    override fun getPosts(): Single<List<Post>> = api
             .getPosts()
             .zipWith(getUsers(), BiFunction { posts, users ->
-                val resultList = ArrayList<Post>(posts.size)
-                for (post in posts) {
+                posts.map { post ->
                     val user = users.single { it.id == post.userId }
-                    resultList.add(Post(
+                    Post(
                             post.userId,
                             post.id,
                             post.title,
                             post.body,
                             user.name,
-                            user.email)
-                    )
+                            user.email,
+                            PostsService.getImageUrl(user.email))
                 }
-                resultList
             })
 
     override fun getComments(postId: Int) = api.getComments(postId)

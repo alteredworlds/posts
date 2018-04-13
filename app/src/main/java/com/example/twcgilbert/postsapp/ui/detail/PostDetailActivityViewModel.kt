@@ -4,7 +4,6 @@ import android.databinding.ObservableField
 import android.databinding.ObservableInt
 import com.example.twcgilbert.postsapp.repo.DataRepository
 import com.example.twcgilbert.postsapp.repo.data.Post
-import com.example.twcgilbert.postsapp.repo.data.imageUrl
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
