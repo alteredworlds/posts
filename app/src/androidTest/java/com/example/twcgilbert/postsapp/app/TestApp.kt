@@ -1,9 +1,9 @@
-package com.example.twcgilbert.postsapp
+package com.example.twcgilbert.postsapp.app
 
 import android.app.Activity
 import android.app.Application
 import android.os.Bundle
-import com.example.twcgilbert.postsapp.di.DaggerTestAppComponent
+import com.example.twcgilbert.postsapp.app.di.DaggerTestAppComponent
 
 
 /**

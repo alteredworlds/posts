@@ -1,7 +1,7 @@
-package com.example.twcgilbert.postsapp.di
+package com.example.twcgilbert.postsapp.app.di
 
 import android.app.Application
-import com.example.twcgilbert.postsapp.TestApp
+import com.example.twcgilbert.postsapp.app.TestApp
 import com.example.twcgilbert.postsapp.repo.di.TestRepoModule
 import dagger.BindsInstance
 import dagger.Component
@@ -19,7 +19,7 @@ import javax.inject.Singleton
         ActivityBuilderModule::class)
 )
 interface TestAppComponent {
-    fun inject(application: TestApp)
+    fun inject(application: TestApp): TestApp
 
     @Component.Builder
     interface Builder {

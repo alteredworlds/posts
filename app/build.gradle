@@ -13,7 +13,7 @@ android {
         targetSdkVersion target_sdk_version
         versionCode version_code
         versionName version_name
-        testInstrumentationRunner "com.example.twcgilbert.postsapp.PostsTestRunner"
+        testInstrumentationRunner "com.example.twcgilbert.postsapp.app.PostsTestRunner"
     }
 
     buildTypes {

@@ -1,4 +1,4 @@
-package com.example.twcgilbert.postsapp
+package com.example.twcgilbert.postsapp.app
 
 import android.app.Application
 import android.content.Context

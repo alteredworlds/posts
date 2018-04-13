@@ -4,7 +4,7 @@ import android.support.test.InstrumentationRegistry
 import android.support.v7.widget.RecyclerView
 import com.azimolabs.conditionwatcher.Instruction
 import com.example.twcgilbert.postsapp.R
-import com.example.twcgilbert.postsapp.TestApp
+import com.example.twcgilbert.postsapp.app.TestApp
 
 /**
  * Created by twcgilbert on 04/10/2017.

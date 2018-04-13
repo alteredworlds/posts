@@ -1,4 +1,4 @@
-package com.example.twcgilbert.postsapp.di
+package com.example.twcgilbert.postsapp.app.di
 
 import com.example.twcgilbert.postsapp.common.di.ActivityScope
 import com.example.twcgilbert.postsapp.ui.detail.PostDetailActivity

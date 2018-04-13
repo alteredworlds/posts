@@ -1,8 +1,9 @@
-package com.example.twcgilbert.postsapp
+package com.example.twcgilbert.postsapp.app
 
 import android.app.Activity
 import android.app.Application
-import com.example.twcgilbert.postsapp.di.DaggerAppComponent
+import com.example.twcgilbert.postsapp.BuildConfig
+import com.example.twcgilbert.postsapp.app.di.DaggerAppComponent
 import com.squareup.leakcanary.LeakCanary
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasActivityInjector

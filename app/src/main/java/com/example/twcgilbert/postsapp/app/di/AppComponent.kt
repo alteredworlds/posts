@@ -1,7 +1,7 @@
-package com.example.twcgilbert.postsapp.di
+package com.example.twcgilbert.postsapp.app.di
 
 import android.app.Application
-import com.example.twcgilbert.postsapp.PostsApplication
+import com.example.twcgilbert.postsapp.app.PostsApplication
 import com.example.twcgilbert.postsapp.repo.di.RepoModule
 import dagger.BindsInstance
 import dagger.Component
