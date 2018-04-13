@@ -5,11 +5,7 @@ package com.example.twcgilbert.postsapp.repo.data
  */
 data class User(
         val id: Int,
-        val name: String,
-        val username: String,
-        val email: String,
-        val address: Address,
-        val phone: String,
-        val website: String,
-        val company: Company
+        val name: String?,
+        val username: String?,
+        val email: String?
 )

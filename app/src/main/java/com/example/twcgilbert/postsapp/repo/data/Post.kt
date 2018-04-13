@@ -14,10 +14,10 @@ import kotlinx.android.parcel.Parcelize
 data class Post(
         val userId: Int,
         val id: Int,
-        val title: String,
-        val body: String,
-        val userName: String,
-        val userEmail: String
+        val title: String?,
+        val body: String?,
+        val userName: String?,
+        val userEmail: String?
 ) : Parcelable
 
 val Post.imageUrl: String

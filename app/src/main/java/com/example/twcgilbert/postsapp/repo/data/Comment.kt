@@ -6,6 +6,6 @@ package com.example.twcgilbert.postsapp.repo.data
 data class Comment(
         val postId: Int,
         val id: Int,
-        val name: String,
-        val email: String,
-        val body: String)
+        val name: String?,
+        val email: String?,
+        val body: String?)

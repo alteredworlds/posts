@@ -10,28 +10,20 @@ import io.reactivex.Observable
 open class PostsServiceFake : PostsService {
     object companion {
         const val userId1 = 1
-        @JvmStatic
-        val userId1Username = "Username1"
-        @JvmStatic
-        val userId1Email = "test1@test.com"
+        const val userId1Username = "Username1"
+        const val userId1Email = "test1@test.com"
 
         const val userId2 = 2
-        @JvmStatic
-        val userId2Username = "Username2"
-        @JvmStatic
-        val userId2Email = "test2@test.com"
+        const val userId2Username = "Username2"
+        const val userId2Email = "test2@test.com"
 
         const val postId1 = 1
-        @JvmStatic
-        val post1Title = "Hi1"
-        @JvmStatic
-        val post1Body = "Body1"
+        const val post1Title = "Hi1"
+        const val post1Body = "Body1"
 
         const val postId2 = 2
-        @JvmStatic
-        val post2Title = "Hi2"
-        @JvmStatic
-        val post2Body = "Body2"
+        const val post2Title = "Hi2"
+        const val post2Body = "Body2"
 
         @JvmStatic
         val testSimplePost1 = SimplePost(userId1,
@@ -84,18 +76,11 @@ open class PostsServiceFake : PostsService {
     }
 
     override fun getUsers(): Observable<List<User>> {
-        val company = Company("Name", "Cool!", "Oh well")
         val users = ArrayList<User>()
         users.add(User(
-                companion.userId1, "Tom", companion.userId1Username, companion.userId1Email,
-                Address("Street1", "Suit1", "City1", "94110", LatLng(0.0, 0.0)),
-                "123", "http://example.com",
-                company))
+                companion.userId1, "Tom", companion.userId1Username, companion.userId1Email))
         users.add(User(
-                companion.userId2, "Tim", companion.userId2Username, companion.userId2Email,
-                Address("Street2", "Suite2", "City2", "94122", LatLng(0.0, 0.0)),
-                "123", "http://example.com",
-                company))
+                companion.userId2, "Tim", companion.userId2Username, companion.userId2Email))
         return Observable.just(users)
     }
 
