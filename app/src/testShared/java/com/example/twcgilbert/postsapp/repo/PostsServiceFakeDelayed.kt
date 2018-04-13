@@ -1,8 +1,5 @@
 package com.example.twcgilbert.postsapp.repo
 
-import com.example.twcgilbert.postsapp.repo.PostsServiceFakeDelayed.companion.commentsDelay
-import com.example.twcgilbert.postsapp.repo.PostsServiceFakeDelayed.companion.postsDelay
-import com.example.twcgilbert.postsapp.repo.PostsServiceFakeDelayed.companion.usersDelay
 import com.example.twcgilbert.postsapp.repo.data.Comment
 import com.example.twcgilbert.postsapp.repo.data.SimplePost
 import com.example.twcgilbert.postsapp.repo.data.User
@@ -14,7 +11,8 @@ import java.util.concurrent.TimeUnit
  * Created by twcgilbert on 23/10/2017.
  */
 class PostsServiceFakeDelayed : PostsServiceFake() {
-    object companion {
+
+    companion object {
         const val postsDelay = 1L
         const val usersDelay = 3L
         const val commentsDelay = 6L

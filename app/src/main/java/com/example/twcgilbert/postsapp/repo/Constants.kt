@@ -10,4 +10,10 @@ object Constants {
     const val ADORABLE_URL = "https://api.adorable.io/avatars/128/"
 
     const val IMAGE_EXTENSION = ".png"
+
+    const val POSTS = "posts"
+
+    const val USERS = "users"
+
+    const val COMMENTS = "comments"
 }

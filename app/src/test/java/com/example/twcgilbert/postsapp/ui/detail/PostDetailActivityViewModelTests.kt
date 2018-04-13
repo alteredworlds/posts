@@ -4,7 +4,6 @@ import com.example.twcgilbert.postsapp.repo.Constants
 import com.example.twcgilbert.postsapp.repo.DataRepositoryImpl
 import com.example.twcgilbert.postsapp.repo.PostsServiceFake
 import com.example.twcgilbert.postsapp.repo.PostsServiceFakeDelayed
-import com.example.twcgilbert.postsapp.repo.PostsServiceFakeDelayed.companion.commentsDelay
 import com.example.twcgilbert.postsapp.ui.PostTestBase
 import org.junit.Rule
 import org.junit.Test
@@ -55,7 +54,7 @@ class PostDetailActivityViewModelTests : PostTestBase() {
     fun testViewModelNonZeroNumberOfCommentsDelayed() {
         viewModel = PostDetailActivityViewModel(
                 view,
-                PostsServiceFake.companion.testPost1,
+                PostsServiceFake.testPost1,
                 DataRepositoryImpl(PostsServiceFakeDelayed()))
 
         // subscribe to comments
@@ -71,7 +70,7 @@ class PostDetailActivityViewModelTests : PostTestBase() {
         assertEquals(0, viewModel.postNumberOfComments.get())
 
         // now advance the scheduler
-        testScheduler.advanceTimeTo(commentsDelay, TimeUnit.SECONDS)
+        testScheduler.advanceTimeTo(PostsServiceFakeDelayed.commentsDelay, TimeUnit.SECONDS)
 
         // we should expect one comment now
         assertEquals(1, viewModel.postNumberOfComments.get())
@@ -97,15 +96,15 @@ class PostDetailActivityViewModelTests : PostTestBase() {
     fun runViewModel1Tests() {
         viewModel = PostDetailActivityViewModel(
                 view,
-                PostsServiceFake.companion.testPost1,
+                PostsServiceFake.testPost1,
                 DataRepositoryImpl(PostsServiceFake()))
-        assertEquals(PostsServiceFake.companion.post1Title, viewModel.postTitle.get())
-        assertEquals(PostsServiceFake.companion.post1Body, viewModel.postBody.get())
-        assertEquals(PostsServiceFake.companion.userId1Username, viewModel.postUserName.get())
+        assertEquals(PostsServiceFake.post1Title, viewModel.postTitle.get())
+        assertEquals(PostsServiceFake.post1Body, viewModel.postBody.get())
+        assertEquals(PostsServiceFake.userId1Username, viewModel.postUserName.get())
 
         // Constants.ADORABLE_URL + userEmail + Constants.IMAGE_EXTENSION
         assertEquals(
-                Constants.ADORABLE_URL + PostsServiceFake.companion.userId1Email + Constants.IMAGE_EXTENSION,
+                Constants.ADORABLE_URL + PostsServiceFake.userId1Email + Constants.IMAGE_EXTENSION,
                 viewModel.userAvatarUrl.get())
         assertEquals(0, viewModel.postNumberOfComments.get())
     }
@@ -113,15 +112,15 @@ class PostDetailActivityViewModelTests : PostTestBase() {
     fun runViewModel2Tests() {
         viewModel = PostDetailActivityViewModel(
                 view,
-                PostsServiceFake.companion.testPost2,
+                PostsServiceFake.testPost2,
                 DataRepositoryImpl(PostsServiceFake()))
-        assertEquals(PostsServiceFake.companion.post2Title, viewModel.postTitle.get())
-        assertEquals(PostsServiceFake.companion.post2Body, viewModel.postBody.get())
-        assertEquals(PostsServiceFake.companion.userId2Username, viewModel.postUserName.get())
+        assertEquals(PostsServiceFake.post2Title, viewModel.postTitle.get())
+        assertEquals(PostsServiceFake.post2Body, viewModel.postBody.get())
+        assertEquals(PostsServiceFake.userId2Username, viewModel.postUserName.get())
 
         // Constants.ADORABLE_URL + userEmail + Constants.IMAGE_EXTENSION
         assertEquals(
-                Constants.ADORABLE_URL + PostsServiceFake.companion.userId2Email + Constants.IMAGE_EXTENSION,
+                Constants.ADORABLE_URL + PostsServiceFake.userId2Email + Constants.IMAGE_EXTENSION,
                 viewModel.userAvatarUrl.get())
         assertEquals(0, viewModel.postNumberOfComments.get())
     }

@@ -7,18 +7,25 @@ import com.example.twcgilbert.postsapp.R
 import okhttp3.Interceptor
 import okhttp3.Response
 
-class NetworkMonitorInterceptor(private val context: Application) : Interceptor {
+class NetworkMonitorInterceptor(context: Application) : Interceptor {
+
+    private val message: String
+    private val connectivityManager: ConnectivityManager?
+
+    init {
+        message = context.getString(R.string.no_network_available)
+        connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as? ConnectivityManager
+    }
 
     override fun intercept(chain: Interceptor.Chain): Response {
         if (isNetworkAvailable()) {
             return chain.proceed(chain.request())
         } else {
-            throw NoNetworkException(context.getString(R.string.no_network_available))
+            throw NoNetworkException(message)
         }
     }
 
     private fun isNetworkAvailable(): Boolean {
-        val cm = context.getSystemService(Context.CONNECTIVITY_SERVICE) as? ConnectivityManager
-        return cm?.activeNetworkInfo?.isConnectedOrConnecting ?: false
+        return connectivityManager?.activeNetworkInfo?.isConnectedOrConnecting ?: false
     }
 }

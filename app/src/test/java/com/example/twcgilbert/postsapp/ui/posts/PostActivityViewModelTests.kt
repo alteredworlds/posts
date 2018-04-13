@@ -4,8 +4,6 @@ import com.example.twcgilbert.postsapp.repo.DataRepositoryImpl
 import com.example.twcgilbert.postsapp.repo.PostsServiceEmpty
 import com.example.twcgilbert.postsapp.repo.PostsServiceFake
 import com.example.twcgilbert.postsapp.repo.PostsServiceFakeDelayed
-import com.example.twcgilbert.postsapp.repo.PostsServiceFakeDelayed.companion.postsDelay
-import com.example.twcgilbert.postsapp.repo.PostsServiceFakeDelayed.companion.usersDelay
 import com.example.twcgilbert.postsapp.ui.PostTestBase
 import org.junit.Rule
 import org.junit.Test
@@ -97,7 +95,8 @@ class PostActivityViewModelTests : PostTestBase() {
         expectEmptyAndInProgress()
 
         // now to 3 seconds
-        testScheduler.advanceTimeTo(Math.max(postsDelay, usersDelay),
+        testScheduler.advanceTimeTo(
+                Math.max(PostsServiceFakeDelayed.postsDelay, PostsServiceFakeDelayed.usersDelay),
                 TimeUnit.SECONDS)
         expectFullAndNotInProgress()
     }
