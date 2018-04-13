@@ -4,12 +4,10 @@ import android.databinding.ObservableBoolean
 import android.databinding.ObservableField
 import com.example.twcgilbert.postsapp.repo.DataRepository
 import com.example.twcgilbert.postsapp.repo.data.Post
-import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import timber.log.Timber
-import java.util.concurrent.TimeUnit
 
 /**
  * Created by twcgilbert on 01/10/2017.

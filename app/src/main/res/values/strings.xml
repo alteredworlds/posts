@@ -3,4 +3,6 @@
     <string name="posts">Posts</string>
     <string name="post_detail">Post</string>
     <string name="num_comments">%1$d comments</string>
+
+    <string name="no_network_available">Please check your internet connection and try again.</string>
 </resources>
