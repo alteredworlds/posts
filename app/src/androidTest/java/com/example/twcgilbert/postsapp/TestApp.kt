@@ -3,8 +3,8 @@ package com.example.twcgilbert.postsapp
 import android.app.Activity
 import android.app.Application
 import android.os.Bundle
+import com.example.twcgilbert.postsapp.di.DaggerTestAppComponent
 
-import com.example.twcgilbert.postsapp.common.di.DaggerTestAppComponent
 
 /**
  * Created by twcgilbert on 02/10/2017.

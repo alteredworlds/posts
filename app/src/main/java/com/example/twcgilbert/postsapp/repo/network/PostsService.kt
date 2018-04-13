@@ -1,9 +1,8 @@
-package com.example.twcgilbert.postsapp.io.network
+package com.example.twcgilbert.postsapp.repo.network
 
-import com.example.twcgilbert.postsapp.io.data.Comment
-import com.example.twcgilbert.postsapp.io.data.Post
-import com.example.twcgilbert.postsapp.io.data.SimplePost
-import com.example.twcgilbert.postsapp.io.data.User
+import com.example.twcgilbert.postsapp.repo.data.Comment
+import com.example.twcgilbert.postsapp.repo.data.SimplePost
+import com.example.twcgilbert.postsapp.repo.data.User
 import io.reactivex.Observable
 import retrofit2.http.GET
 import retrofit2.http.Query

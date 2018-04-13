@@ -1,11 +1,11 @@
-package com.example.twcgilbert.postsapp.io
+package com.example.twcgilbert.postsapp.repo
 
-import com.example.twcgilbert.postsapp.io.PostsServiceFakeDelayed.companion.commentsDelay
-import com.example.twcgilbert.postsapp.io.PostsServiceFakeDelayed.companion.postsDelay
-import com.example.twcgilbert.postsapp.io.PostsServiceFakeDelayed.companion.usersDelay
-import com.example.twcgilbert.postsapp.io.data.Comment
-import com.example.twcgilbert.postsapp.io.data.SimplePost
-import com.example.twcgilbert.postsapp.io.data.User
+import com.example.twcgilbert.postsapp.repo.PostsServiceFakeDelayed.companion.commentsDelay
+import com.example.twcgilbert.postsapp.repo.PostsServiceFakeDelayed.companion.postsDelay
+import com.example.twcgilbert.postsapp.repo.PostsServiceFakeDelayed.companion.usersDelay
+import com.example.twcgilbert.postsapp.repo.data.Comment
+import com.example.twcgilbert.postsapp.repo.data.SimplePost
+import com.example.twcgilbert.postsapp.repo.data.User
 import io.reactivex.Observable
 import io.reactivex.functions.BiFunction
 import java.util.concurrent.TimeUnit

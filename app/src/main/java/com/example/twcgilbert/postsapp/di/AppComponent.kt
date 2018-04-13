@@ -1,7 +1,8 @@
-package com.example.twcgilbert.postsapp.common.di
+package com.example.twcgilbert.postsapp.di
 
 import android.app.Application
 import com.example.twcgilbert.postsapp.PostsApplication
+import com.example.twcgilbert.postsapp.repo.di.RepoModule
 import dagger.BindsInstance
 import dagger.Component
 import dagger.android.support.AndroidSupportInjectionModule
@@ -13,7 +14,7 @@ import javax.inject.Singleton
 @Singleton
 @Component(modules = arrayOf(
         AndroidSupportInjectionModule::class,
-        AppModule::class,
+        RepoModule::class,
         ActivityBuilderModule::class)
 )
 interface AppComponent {

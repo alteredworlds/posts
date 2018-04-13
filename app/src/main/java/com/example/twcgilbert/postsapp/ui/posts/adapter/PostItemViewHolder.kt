@@ -6,8 +6,8 @@ import android.support.v7.widget.RecyclerView
 import android.view.View
 import com.example.twcgilbert.postsapp.BR
 import com.example.twcgilbert.postsapp.common.ui.AdapterItemClick
-import com.example.twcgilbert.postsapp.io.data.Post
-import com.example.twcgilbert.postsapp.io.data.imageUrl
+import com.example.twcgilbert.postsapp.repo.data.Post
+import com.example.twcgilbert.postsapp.repo.data.imageUrl
 
 /**
  * Created by twcgilbert on 01/10/2017.

@@ -1,9 +1,9 @@
-package com.example.twcgilbert.postsapp.io
+package com.example.twcgilbert.postsapp.repo
 
-import com.example.twcgilbert.postsapp.io.data.Comment
-import com.example.twcgilbert.postsapp.io.data.SimplePost
-import com.example.twcgilbert.postsapp.io.data.User
-import com.example.twcgilbert.postsapp.io.network.PostsService
+import com.example.twcgilbert.postsapp.repo.data.Comment
+import com.example.twcgilbert.postsapp.repo.data.SimplePost
+import com.example.twcgilbert.postsapp.repo.data.User
+import com.example.twcgilbert.postsapp.repo.network.PostsService
 import io.reactivex.Observable
 
 /**

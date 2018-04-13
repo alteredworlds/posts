@@ -1,9 +1,9 @@
 package com.example.twcgilbert.postsapp.ui.detail.di
 
-import com.example.twcgilbert.postsapp.common.di.ActivityScope
-import com.example.twcgilbert.postsapp.io.DataRepository
-import com.example.twcgilbert.postsapp.io.data.Post
-import com.example.twcgilbert.postsapp.io.data.getPost
+import com.example.twcgilbert.postsapp.repo.di.ActivityScope
+import com.example.twcgilbert.postsapp.repo.DataRepository
+import com.example.twcgilbert.postsapp.repo.data.Post
+import com.example.twcgilbert.postsapp.repo.data.getPost
 import com.example.twcgilbert.postsapp.ui.detail.PostDetailActivity
 import com.example.twcgilbert.postsapp.ui.detail.PostDetailActivityContract
 import com.example.twcgilbert.postsapp.ui.detail.PostDetailActivityViewModel

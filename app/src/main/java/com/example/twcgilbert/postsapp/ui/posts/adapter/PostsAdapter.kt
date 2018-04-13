@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.example.twcgilbert.postsapp.common.ui.AdapterItemClick
 import com.example.twcgilbert.postsapp.databinding.PostItemBinding
-import com.example.twcgilbert.postsapp.io.data.Post
+import com.example.twcgilbert.postsapp.repo.data.Post
 import com.example.twcgilbert.postsapp.ui.posts.PostsActivityContract
 
 /**

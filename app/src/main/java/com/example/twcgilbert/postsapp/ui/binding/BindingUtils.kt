@@ -1,4 +1,4 @@
-package com.example.twcgilbert.postsapp.common.binding
+package com.example.twcgilbert.postsapp.ui.binding
 
 import android.databinding.BindingAdapter
 import android.graphics.drawable.Drawable

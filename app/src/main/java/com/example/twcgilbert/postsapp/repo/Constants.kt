@@ -1,4 +1,4 @@
-package com.example.twcgilbert.postsapp.io
+package com.example.twcgilbert.postsapp.repo
 
 /**
  * Created by twcgilbert on 01/10/2017.

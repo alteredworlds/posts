@@ -2,7 +2,7 @@ package com.example.twcgilbert.postsapp.ui.posts.adapter
 
 import android.databinding.BindingAdapter
 import android.support.v7.widget.RecyclerView
-import com.example.twcgilbert.postsapp.io.data.Post
+import com.example.twcgilbert.postsapp.repo.data.Post
 import com.example.twcgilbert.postsapp.ui.posts.PostsActivityContract
 
 /**

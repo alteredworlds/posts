@@ -2,8 +2,8 @@ package com.example.twcgilbert.postsapp.ui.posts
 
 import android.databinding.ObservableBoolean
 import android.databinding.ObservableField
-import com.example.twcgilbert.postsapp.io.DataRepository
-import com.example.twcgilbert.postsapp.io.data.Post
+import com.example.twcgilbert.postsapp.repo.DataRepository
+import com.example.twcgilbert.postsapp.repo.data.Post
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
@@ -41,17 +41,6 @@ class PostsActivityViewModel(
                             progressVisible.set(false)
                             view.showError(it.localizedMessage)
                         }))
-
-        val myRandomObservable = Observable.just("")
-                .subscribeOn(Schedulers.computation())
-                .doOnNext { Timber.d("[1] Which thread? -> %s", Thread.currentThread().name) }
-                .doOnNext { Timber.d("[2] Which thread? -> %s", Thread.currentThread().name) }
-                .subscribeOn(Schedulers.computation())
-                .observeOn(Schedulers.io())
-                .doOnNext { Timber.d("[3] Which thread? -> %s", Thread.currentThread().name) }
-                .observeOn(AndroidSchedulers.mainThread())
-                .debounce(400L, TimeUnit.MILLISECONDS)
-                .subscribe({ Timber.d("[4] Which thread? -> %s", Thread.currentThread().name) })
     }
 
     override fun onDestroy() {

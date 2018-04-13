@@ -2,7 +2,7 @@ package com.example.twcgilbert.postsapp
 
 import android.app.Activity
 import android.app.Application
-import com.example.twcgilbert.postsapp.common.di.DaggerAppComponent
+import com.example.twcgilbert.postsapp.di.DaggerAppComponent
 import com.squareup.leakcanary.LeakCanary
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasActivityInjector

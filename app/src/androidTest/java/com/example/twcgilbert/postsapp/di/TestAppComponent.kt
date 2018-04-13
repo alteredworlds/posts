@@ -1,7 +1,8 @@
-package com.example.twcgilbert.postsapp.common.di
+package com.example.twcgilbert.postsapp.di
 
 import android.app.Application
 import com.example.twcgilbert.postsapp.TestApp
+import com.example.twcgilbert.postsapp.repo.di.TestRepoModule
 import dagger.BindsInstance
 import dagger.Component
 import dagger.android.support.AndroidSupportInjectionModule
@@ -13,8 +14,8 @@ import javax.inject.Singleton
 @Singleton
 @Component(modules = arrayOf(
         AndroidSupportInjectionModule::class,
-        //AppModule::class, // uncomment => all posts in androidTest
-        TestAppModule::class, // this shows just one post, so one or the other
+        //RepoModule::class, // uncomment => all posts in androidTest
+        TestRepoModule::class, // this shows just one post, so one or the other
         ActivityBuilderModule::class)
 )
 interface TestAppComponent {

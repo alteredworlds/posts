@@ -1,13 +1,11 @@
-package com.example.twcgilbert.postsapp.common.di
+package com.example.twcgilbert.postsapp.repo.di
 
-import com.example.twcgilbert.postsapp.io.Constants
-import com.example.twcgilbert.postsapp.io.DataRepository
-import com.example.twcgilbert.postsapp.io.DataRepositoryImpl
-import com.example.twcgilbert.postsapp.io.data.User
-import com.example.twcgilbert.postsapp.io.network.PostsService
+import com.example.twcgilbert.postsapp.repo.Constants
+import com.example.twcgilbert.postsapp.repo.DataRepository
+import com.example.twcgilbert.postsapp.repo.DataRepositoryImpl
+import com.example.twcgilbert.postsapp.repo.network.PostsService
 import dagger.Module
 import dagger.Provides
-import io.reactivex.Observable
 import javax.inject.Singleton
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.Retrofit
@@ -15,10 +13,10 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 
 
 /**
- * The Dagger module of the application, containing all application-wide singletons.
+ * Provides repo related items
  */
 @Module
-class AppModule {
+class RepoModule {
 
     @Provides
     @Singleton

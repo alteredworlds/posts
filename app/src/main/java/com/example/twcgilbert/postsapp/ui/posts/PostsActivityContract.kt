@@ -3,7 +3,7 @@ package com.example.twcgilbert.postsapp.ui.posts
 import android.databinding.ObservableBoolean
 import android.databinding.ObservableField
 import com.example.twcgilbert.postsapp.common.ui.BaseContract
-import com.example.twcgilbert.postsapp.io.data.Post
+import com.example.twcgilbert.postsapp.repo.data.Post
 
 /**
  * Created by twcgilbert on 01/10/2017.

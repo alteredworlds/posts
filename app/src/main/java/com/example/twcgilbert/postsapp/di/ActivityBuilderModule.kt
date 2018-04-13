@@ -1,5 +1,6 @@
-package com.example.twcgilbert.postsapp.common.di
+package com.example.twcgilbert.postsapp.di
 
+import com.example.twcgilbert.postsapp.repo.di.ActivityScope
 import com.example.twcgilbert.postsapp.ui.detail.PostDetailActivity
 import com.example.twcgilbert.postsapp.ui.detail.di.PostDetailActivityModule
 import com.example.twcgilbert.postsapp.ui.posts.PostsActivity

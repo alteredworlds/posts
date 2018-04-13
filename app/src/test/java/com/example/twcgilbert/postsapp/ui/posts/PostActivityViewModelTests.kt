@@ -1,11 +1,11 @@
 package com.example.twcgilbert.postsapp.ui.posts
 
-import com.example.twcgilbert.postsapp.io.DataRepositoryImpl
-import com.example.twcgilbert.postsapp.io.PostsServiceEmpty
-import com.example.twcgilbert.postsapp.io.PostsServiceFake
-import com.example.twcgilbert.postsapp.io.PostsServiceFakeDelayed
-import com.example.twcgilbert.postsapp.io.PostsServiceFakeDelayed.companion.postsDelay
-import com.example.twcgilbert.postsapp.io.PostsServiceFakeDelayed.companion.usersDelay
+import com.example.twcgilbert.postsapp.repo.DataRepositoryImpl
+import com.example.twcgilbert.postsapp.repo.PostsServiceEmpty
+import com.example.twcgilbert.postsapp.repo.PostsServiceFake
+import com.example.twcgilbert.postsapp.repo.PostsServiceFakeDelayed
+import com.example.twcgilbert.postsapp.repo.PostsServiceFakeDelayed.companion.postsDelay
+import com.example.twcgilbert.postsapp.repo.PostsServiceFakeDelayed.companion.usersDelay
 import com.example.twcgilbert.postsapp.ui.PostTestBase
 import org.junit.Rule
 import org.junit.Test

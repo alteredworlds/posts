@@ -1,9 +1,9 @@
-package com.example.twcgilbert.postsapp.io.data
+package com.example.twcgilbert.postsapp.repo.data
 
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Parcelable
-import com.example.twcgilbert.postsapp.io.Constants
+import com.example.twcgilbert.postsapp.repo.Constants
 import kotlinx.android.parcel.Parcelize
 
 /**

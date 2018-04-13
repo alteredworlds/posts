@@ -1,7 +1,7 @@
-package com.example.twcgilbert.postsapp.io
+package com.example.twcgilbert.postsapp.repo
 
-import com.example.twcgilbert.postsapp.io.data.Post
-import com.example.twcgilbert.postsapp.io.network.PostsService
+import com.example.twcgilbert.postsapp.repo.data.Post
+import com.example.twcgilbert.postsapp.repo.network.PostsService
 import io.reactivex.Observable
 import io.reactivex.functions.BiFunction
 
