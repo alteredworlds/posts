@@ -13,4 +13,4 @@ Uses MVVM pattern, Data Binding, RxJava2, Dagger2, android-dagger.
 
 Doesn't currently use Google's ViewModel; my design pre-dates the release of this component. 
 
-Push to branch causes the project to build on CircleCI
+Push to branch causes the project to build on CircleCI  [![CircleCI](https://circleci.com/gh/alteredworlds/posts.svg?style=svg)](https://circleci.com/gh/alteredworlds/posts)
