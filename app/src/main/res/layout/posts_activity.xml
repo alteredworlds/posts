@@ -1,54 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-
-        <import type="android.view.View" />
 
         <variable
             name="viewModel"
             type="com.example.twcgilbert.postsapp.ui.posts.PostsActivityContract.ViewModel" />
     </data>
 
-    <FrameLayout
+    <android.support.design.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context="com.example.twcgilbert.postsapp.ui.posts.PostsActivity">
+        app:snackBarText="@{viewModel.error}">
 
-        <android.support.v7.widget.Toolbar
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="@color/colorPrimary">
-
-            <TextView
-                style="@style/TextTitle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/posts" />
-
-        </android.support.v7.widget.Toolbar>
-
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/recyclerView"
+        <android.support.design.widget.AppBarLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/left_right_margin"
-            android:layout_marginStart="@dimen/left_right_margin"
-            android:layout_marginTop="?attr/actionBarSize"
-            android:text="Hello World!"
-            app:posts="@{viewModel.posts}"
-            app:postsClickListener="@{viewModel}"
-            app:horizontalDivider="@{@drawable/horizontal_space_divider}"
-            app:layoutManager="android.support.v7.widget.LinearLayoutManager" />
+            android:theme="@style/AppTheme.AppBarOverlay">
 
-        <ProgressBar
-            style="@android:style/Widget.ProgressBar.Large.Inverse"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:visibility="@{viewModel.progressVisible ? View.VISIBLE : View.GONE}" />
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="@color/colorPrimary"
+                app:popupTheme="@style/AppTheme.PopupOverlay">
 
-    </FrameLayout>
+                <TextView
+                    android:id="@+id/toolbar_title"
+                    style="@style/TextTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="@string/posts" />
+            </android.support.v7.widget.Toolbar>
+
+        </android.support.design.widget.AppBarLayout>
+
+        <include
+            layout="@layout/posts_activity_content"
+            app:viewModel="@{viewModel}" />
+
+    </android.support.design.widget.CoordinatorLayout>
+
 </layout>

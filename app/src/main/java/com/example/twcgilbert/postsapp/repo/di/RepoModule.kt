@@ -1,10 +1,13 @@
 package com.example.twcgilbert.postsapp.repo.di
 
 import android.app.Application
+import android.arch.persistence.room.Room
 import com.example.twcgilbert.postsapp.repo.DataRepository
 import com.example.twcgilbert.postsapp.repo.DataRepositoryImpl
+import com.example.twcgilbert.postsapp.repo.domain.*
 import com.example.twcgilbert.postsapp.repo.network.NetworkMonitorInterceptor
 import com.example.twcgilbert.postsapp.repo.network.PostsService
+import com.example.twcgilbert.postsapp.repo.persistence.LocalDatabase
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient
@@ -29,7 +32,21 @@ class RepoModule {
 
     @Provides
     @Singleton
-    fun provideDataRepository(networkMonitorInterceptor: NetworkMonitorInterceptor): DataRepository {
+    fun providesLocalDatabase(context: Application): LocalDatabase =
+            Room.databaseBuilder(context,
+                    LocalDatabase::class.java, "Postsapp.db")
+                    .build()
+
+    @Provides
+    @Singleton
+    fun provideDataRepository(
+            localDatabase: LocalDatabase
+    ): DataRepository = DataRepositoryImpl(localDatabase)
+
+    @Provides
+    @Singleton
+    fun providesPostsService(
+            networkMonitorInterceptor: NetworkMonitorInterceptor): PostsService {
         // helps with debugging - we get to see HTTP body in logcat for debug builds
         val loggingInterceptor = HttpLoggingInterceptor(
                 HttpLoggingInterceptor.Logger { message ->
@@ -48,6 +65,27 @@ class RepoModule {
                 .client(httpClient)
                 .build()
 
-        return DataRepositoryImpl(retrofit.create<PostsService>(PostsService::class.java))
+        return retrofit.create<PostsService>(PostsService::class.java)
     }
+
+    @Provides
+    @Singleton
+    fun providesRefreshPostsUseCase(
+            api: PostsService,
+            mapper: Mapper,
+            localDatabase: LocalDatabase
+    ): RefreshPostsUseCase {
+        return RefreshPostsUseCaseImpl(api, mapper, localDatabase)
+    }
+
+    @Provides
+    @Singleton
+    fun providesRefreshCommentsUseCase(
+            api: PostsService,
+            mapper: Mapper,
+            localDatabase: LocalDatabase
+    ): RefreshCommentsUseCase = RefreshCommentsUseCaseImpl(
+            api,
+            mapper,
+            localDatabase)
 }

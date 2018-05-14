@@ -7,6 +7,7 @@ import com.example.twcgilbert.postsapp.app.di.DaggerAppComponent
 import com.squareup.leakcanary.LeakCanary
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasActivityInjector
+import io.reactivex.plugins.RxJavaPlugins
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -23,6 +24,7 @@ open class PostsApplication : Application(), HasActivityInjector {
         LeakCanary.install(this);
         injectDependencies()
         setupLogger()
+        setupRxJava()
     }
 
     protected open fun injectDependencies() {
@@ -36,6 +38,12 @@ open class PostsApplication : Application(), HasActivityInjector {
     private fun setupLogger() {
         if (BuildConfig.DEBUG) {
             Timber.plant(Timber.DebugTree())
+        }
+    }
+
+    private fun setupRxJava() {
+        RxJavaPlugins.setErrorHandler {
+            Timber.e("RxJavaPlugins.errorHander(${it.localizedMessage})")
         }
     }
 

@@ -1,4 +1,4 @@
-package com.example.twcgilbert.postsapp.common.ui
+package com.example.twcgilbert.postsapp.common.ui.adapter
 
 /**
  * Created by twcgilbert on 01/10/2017.

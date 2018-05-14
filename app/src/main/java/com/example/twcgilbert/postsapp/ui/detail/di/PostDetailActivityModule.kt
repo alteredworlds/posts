@@ -2,8 +2,9 @@ package com.example.twcgilbert.postsapp.ui.detail.di
 
 import com.example.twcgilbert.postsapp.common.di.ActivityScope
 import com.example.twcgilbert.postsapp.repo.DataRepository
-import com.example.twcgilbert.postsapp.repo.data.Post
-import com.example.twcgilbert.postsapp.repo.data.getPost
+import com.example.twcgilbert.postsapp.repo.domain.RefreshCommentsUseCase
+import com.example.twcgilbert.postsapp.repo.model.Post
+import com.example.twcgilbert.postsapp.repo.model.getPost
 import com.example.twcgilbert.postsapp.ui.detail.PostDetailActivity
 import com.example.twcgilbert.postsapp.ui.detail.PostDetailActivityContract
 import com.example.twcgilbert.postsapp.ui.detail.PostDetailActivityViewModel
@@ -22,13 +23,9 @@ class PostDetailActivityModule {
 
     @Provides
     @ActivityScope
-    fun providesView(activity: PostDetailActivity): PostDetailActivityContract.View = activity
-
-    @Provides
-    @ActivityScope
     fun providesViewModel(
-            view: PostDetailActivityContract.View,
             post: Post,
-            repository: DataRepository): PostDetailActivityContract.ViewModel =
-            PostDetailActivityViewModel(view, post, repository)
+            repository: DataRepository,
+            refreshUseCase: RefreshCommentsUseCase): PostDetailActivityContract.ViewModel =
+            PostDetailActivityViewModel(post, repository, refreshUseCase)
 }

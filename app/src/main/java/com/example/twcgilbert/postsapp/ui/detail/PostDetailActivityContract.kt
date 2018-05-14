@@ -9,11 +9,9 @@ import com.example.twcgilbert.postsapp.common.ui.BaseContract
  */
 interface PostDetailActivityContract {
 
-    interface View : BaseContract.View {
-
-    }
-
     interface ViewModel : BaseContract.ViewModel {
+
+        val error: ObservableField<String>
 
         val postTitle: ObservableField<String>
 

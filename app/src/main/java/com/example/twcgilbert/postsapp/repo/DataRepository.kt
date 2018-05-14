@@ -1,18 +1,14 @@
 package com.example.twcgilbert.postsapp.repo
 
-import com.example.twcgilbert.postsapp.repo.data.Comment
-import com.example.twcgilbert.postsapp.repo.data.Post
-import com.example.twcgilbert.postsapp.repo.data.User
-import io.reactivex.Single
+import com.example.twcgilbert.postsapp.repo.model.Post
+import io.reactivex.Flowable
 
 /**
  * Created by twcgilbert on 01/10/2017.
  */
 interface DataRepository {
 
-    fun getPosts(): Single<List<Post>>
+    fun getPosts(): Flowable<List<Post>>
 
-    fun getUsers(): Single<List<User>>
-
-    fun getComments(postId: Int): Single<List<Comment>>
+    fun getNumComments(postId: Int): Flowable<Int>
 }

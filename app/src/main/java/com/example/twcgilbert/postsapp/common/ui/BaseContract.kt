@@ -5,11 +5,6 @@ package com.example.twcgilbert.postsapp.common.ui
  */
 interface BaseContract {
 
-    interface View {
-
-        fun showError(message: String)
-    }
-
     interface ViewModel {
 
         fun onCreate()

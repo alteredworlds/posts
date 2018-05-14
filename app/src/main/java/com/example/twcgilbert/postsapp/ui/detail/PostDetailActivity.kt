@@ -10,7 +10,7 @@ import javax.inject.Inject
 /**
  * Created by twcgilbert on 01/10/2017.
  */
-class PostDetailActivity : BaseActivity(), PostDetailActivityContract.View {
+class PostDetailActivity : BaseActivity() {
 
     @Inject lateinit var viewModel: PostDetailActivityContract.ViewModel
 

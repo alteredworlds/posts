@@ -3,42 +3,67 @@ package com.example.twcgilbert.postsapp.ui.posts
 import android.databinding.ObservableBoolean
 import android.databinding.ObservableField
 import com.example.twcgilbert.postsapp.repo.DataRepository
-import com.example.twcgilbert.postsapp.repo.data.Post
+import com.example.twcgilbert.postsapp.repo.domain.RefreshPostsUseCase
+import com.example.twcgilbert.postsapp.repo.model.Post
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import timber.log.Timber
+import java.lang.ref.WeakReference
 
 /**
  * Created by twcgilbert on 01/10/2017.
  */
 class PostsActivityViewModel(
-        private val view: PostsActivityContract.View,
-        private val repository: DataRepository) :
+        navigateForPost: PostsActivityContract.NavigateForPost,
+        private val repository: DataRepository,
+        private val refreshUseCase: RefreshPostsUseCase) :
         PostsActivityContract.ViewModel {
 
+    private val navigator = WeakReference<PostsActivityContract.NavigateForPost>(navigateForPost)
+
     private val disposables = CompositeDisposable()
+
+    override val error = ObservableField<String>()
 
     override val posts = ObservableField<List<Post>>(ArrayList<Post>(0))
 
     override val progressVisible = ObservableBoolean()
 
     override fun onCreate() {
-        progressVisible.set(true)
+        error.set("")
         disposables.add(repository.getPosts()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
                         {
                             Timber.d("We should now have %d posts!", it.size);
-                            progressVisible.set(false)
                             posts.set(it)
                         },
                         {
                             Timber.d(it, "Failed to retrieve posts!")
-                            progressVisible.set(false)
-                            view.showError(it.localizedMessage)
+                            error.set(it.localizedMessage)
                         }))
+        // we should also refresh
+        onRefresh()
+    }
+
+    override fun onRefresh() {
+        progressVisible.set(true)
+        error.set("")
+        disposables.add(refreshUseCase.execute()
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                        {
+                            progressVisible.set(false)
+                            Timber.d("Data retrieved!");
+                        },
+                        {
+                            Timber.d(it, "Failed to retrieve posts!")
+                            progressVisible.set(false)
+                            error.set(it.localizedMessage)
+                        }
+                ))
     }
 
     override fun onDestroy() {
@@ -47,6 +72,6 @@ class PostsActivityViewModel(
 
     override fun onPostClicked(post: Post) {
         Timber.d("Clicked Post %s", post);
-        view.navigateForPost(post)
+        navigator.get()?.navigateForPost(post)
     }
 }

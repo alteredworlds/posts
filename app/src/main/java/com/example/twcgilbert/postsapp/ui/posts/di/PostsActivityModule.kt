@@ -2,6 +2,7 @@ package com.example.twcgilbert.postsapp.ui.posts.di
 
 import com.example.twcgilbert.postsapp.common.di.ActivityScope
 import com.example.twcgilbert.postsapp.repo.DataRepository
+import com.example.twcgilbert.postsapp.repo.domain.RefreshPostsUseCase
 import com.example.twcgilbert.postsapp.ui.posts.PostsActivity
 import com.example.twcgilbert.postsapp.ui.posts.PostsActivityContract
 import com.example.twcgilbert.postsapp.ui.posts.PostsActivityViewModel
@@ -16,12 +17,16 @@ class PostsActivityModule {
 
     @Provides
     @ActivityScope
-    fun providesView(activity: PostsActivity): PostsActivityContract.View = activity
+    fun providesNavigateForPost(activity: PostsActivity): PostsActivityContract.NavigateForPost = activity
 
     @Provides
     @ActivityScope
     fun providesViewModel(
-            view: PostsActivityContract.View,
-            repository: DataRepository): PostsActivityContract.ViewModel =
-            PostsActivityViewModel(view, repository)
+            navigateForPost: PostsActivityContract.NavigateForPost,
+            repository: DataRepository,
+            refreshUseCase: RefreshPostsUseCase): PostsActivityContract.ViewModel =
+            PostsActivityViewModel(
+                    navigateForPost,
+                    repository,
+                    refreshUseCase)
 }

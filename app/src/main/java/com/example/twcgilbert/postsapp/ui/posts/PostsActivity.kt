@@ -6,12 +6,12 @@ import android.os.Bundle
 import com.example.twcgilbert.postsapp.R
 import com.example.twcgilbert.postsapp.common.ui.BaseActivity
 import com.example.twcgilbert.postsapp.databinding.PostsActivityBinding
-import com.example.twcgilbert.postsapp.repo.data.Post
-import com.example.twcgilbert.postsapp.repo.data.putPost
+import com.example.twcgilbert.postsapp.repo.model.Post
+import com.example.twcgilbert.postsapp.repo.model.putPost
 import com.example.twcgilbert.postsapp.ui.detail.PostDetailActivity
 import javax.inject.Inject
 
-class PostsActivity : BaseActivity(), PostsActivityContract.View {
+class PostsActivity : BaseActivity(), PostsActivityContract.NavigateForPost {
 
     @Inject lateinit var viewModel: PostsActivityContract.ViewModel
 
