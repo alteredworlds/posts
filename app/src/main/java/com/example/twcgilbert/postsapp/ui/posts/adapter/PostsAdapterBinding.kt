@@ -18,5 +18,5 @@ fun bindPostsAdapter(recyclerView: RecyclerView,
         postsAdapter = PostsAdapter(onPostClicked)
         recyclerView.adapter = postsAdapter
     }
-    postsAdapter.items = posts
+    postsAdapter.submitList(posts)
 }
