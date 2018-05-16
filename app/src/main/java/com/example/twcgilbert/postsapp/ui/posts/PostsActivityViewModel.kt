@@ -32,17 +32,6 @@ class PostsActivityViewModel(
 
     private val disposables = CompositeDisposable()
 
-    private val observablePagedPosts =
-            RxPagedListBuilder(
-                    repository.getPosts(),
-                    PagedList.Config.Builder()
-                            .setPageSize(PAGE_SIZE)
-                            .setInitialLoadSizeHint(PAGE_HINT_INITIAL_LOAD)
-                            .setPrefetchDistance(PAGE_PREFETCH_DISTANCE)
-                            .setEnablePlaceholders(true)
-                            .build())
-                    .buildObservable()
-
     override val error = ObservableField<String>()
 
     override val posts = ObservableField<PagedList<Post>>()
@@ -51,18 +40,27 @@ class PostsActivityViewModel(
 
     override fun onCreate() {
         error.set("")
-        disposables.add(observablePagedPosts
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(
-                        {
-                            Timber.d("We should now have %d posts!", it.size);
-                            posts.set(it)
-                        },
-                        {
-                            Timber.d(it, "Failed to retrieve posts!")
-                            error.set(it.localizedMessage)
-                        }))
+        disposables.add(
+                RxPagedListBuilder(
+                        repository.getPosts(),
+                        PagedList.Config.Builder()
+                                .setPageSize(PAGE_SIZE)
+                                .setInitialLoadSizeHint(PAGE_HINT_INITIAL_LOAD)
+                                .setPrefetchDistance(PAGE_PREFETCH_DISTANCE)
+                                .setEnablePlaceholders(true)
+                                .build())
+                        .buildObservable()
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(
+                                {
+                                    Timber.d("We should now have %d posts!", it.size);
+                                    posts.set(it)
+                                },
+                                {
+                                    Timber.d(it, "Failed to retrieve posts!")
+                                    error.set(it.localizedMessage)
+                                }))
         // we should also refresh
         onRefresh()
     }

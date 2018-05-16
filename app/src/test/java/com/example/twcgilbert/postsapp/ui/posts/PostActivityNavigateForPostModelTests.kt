@@ -109,7 +109,7 @@ class PostActivityNavigateForPostModelTests : PostTestBase() {
 //    }
 //
     fun expectEmptyAndNotInProgress() {
-        assertEquals(0, viewModel.posts.get()?.size)
+        assertEquals(null, viewModel.posts.get()?.size)
         assertEquals(false, viewModel.progressVisible.get())
     }
 //

@@ -1,6 +1,8 @@
 package com.example.twcgilbert.postsapp.repo.persistence
 
 import android.arch.core.executor.testing.InstantTaskExecutorRule
+import android.arch.paging.PagedList
+import android.arch.paging.RxPagedListBuilder
 import android.arch.persistence.room.Room
 import android.database.sqlite.SQLiteConstraintException
 import android.support.test.InstrumentationRegistry
@@ -68,7 +70,7 @@ class PostDaoTest {
     }
 
     @Test
-    fun insertAndGetPosts() {
+    fun insertAndGetAll() {
         val list = arrayListOf(POST, POST3)
         // When inserting a new post in the data source
         database.postDao().insertAll(list)
@@ -80,7 +82,7 @@ class PostDaoTest {
     }
 
     @Test
-    fun insertAndGetPostsDenormalised() {
+    fun insertAndGetAllPostsPaged() {
         val list = arrayListOf(POST, POST3)
         // When inserting a new post in the data source
         database.postDao().insertAll(list)
@@ -90,7 +92,13 @@ class PostDaoTest {
                 Post(POST.id, POST.userId, POST.title, POST.body, USER.name, USER.email),
                 Post(POST3.id, POST3.userId, POST3.title, POST3.body, USER.name, USER.email)
         )
-        database.postDao().getAllDenormalised()
+        RxPagedListBuilder(
+                database.postDao().getAllPostsPaged(),
+                PagedList.Config.Builder()
+                        .setPageSize(resultList.size)
+                        .build())
+                .buildObservable()
+                .map { it.toList() }
                 .test()
                 .assertValues(resultList)
     }
