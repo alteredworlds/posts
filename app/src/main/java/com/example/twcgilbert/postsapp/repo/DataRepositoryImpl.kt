@@ -8,7 +8,7 @@ import com.example.twcgilbert.postsapp.repo.persistence.LocalDatabase
 class DataRepositoryImpl(private val db: LocalDatabase) : DataRepository {
 
     override fun getPosts() = db.postDao()
-            .getAllDenormalised()
+            .getAllPostsPaged()
 
     override fun getNumComments(postId: Int) = db.commentDao()
             .getNumCommentsForPostId(postId)

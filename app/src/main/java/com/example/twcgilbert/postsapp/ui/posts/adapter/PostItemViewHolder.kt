@@ -26,7 +26,7 @@ class PostItemViewHolder(
         itemClick?.onItemClick(adapterPosition)
     }
 
-    fun bindAndExecutePending(postItem: Post) {
+    fun bindAndExecutePending(postItem: Post?) {
         // transfer the data
         update(postItem)
         // bind to this instance (acting as ViewModel for the list item)
@@ -35,8 +35,8 @@ class PostItemViewHolder(
         binding.executePendingBindings()
     }
 
-    private fun update(postItem: Post) {
-        title.set(postItem.title)
-        userAvatarUrl.set(postItem.imageUrl)
+    private fun update(postItem: Post?) {
+        title.set(postItem?.title ?: "")
+        userAvatarUrl.set(postItem?.imageUrl ?: "")
     }
 }

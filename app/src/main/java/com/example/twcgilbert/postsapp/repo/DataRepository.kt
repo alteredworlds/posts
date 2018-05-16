@@ -1,5 +1,6 @@
 package com.example.twcgilbert.postsapp.repo
 
+import android.arch.paging.DataSource
 import com.example.twcgilbert.postsapp.repo.model.Post
 import io.reactivex.Flowable
 
@@ -8,7 +9,7 @@ import io.reactivex.Flowable
  */
 interface DataRepository {
 
-    fun getPosts(): Flowable<List<Post>>
+    fun getPosts(): DataSource.Factory<Int, Post>
 
     fun getNumComments(postId: Int): Flowable<Int>
 }

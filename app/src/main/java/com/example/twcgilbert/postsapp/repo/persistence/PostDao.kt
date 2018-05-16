@@ -1,5 +1,6 @@
 package com.example.twcgilbert.postsapp.repo.persistence
 
+import android.arch.paging.DataSource
 import android.arch.persistence.room.*
 import com.example.twcgilbert.postsapp.repo.model.Post
 import com.example.twcgilbert.postsapp.repo.persistence.model.PostEntity
@@ -10,7 +11,7 @@ abstract class PostDao {
     @Query("SELECT posts.id, posts.userId, posts.title, posts.body, users.name AS userName, users.email AS userEmail"
             + " FROM posts"
             + " LEFT JOIN users ON posts.userId = users.id")
-    abstract fun getAllDenormalised(): Flowable<List<Post>>
+    abstract fun getAllPostsPaged(): DataSource.Factory<Int, Post>
 
     @Query("SELECT * FROM posts")
     abstract fun getAll(): Flowable<List<PostEntity>>

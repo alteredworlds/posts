@@ -1,5 +1,7 @@
 package com.example.twcgilbert.postsapp.ui.posts
 
+import android.arch.paging.PagedList
+import android.arch.paging.RxPagedListBuilder
 import android.databinding.ObservableBoolean
 import android.databinding.ObservableField
 import com.example.twcgilbert.postsapp.repo.DataRepository
@@ -20,19 +22,36 @@ class PostsActivityViewModel(
         private val refreshUseCase: RefreshPostsUseCase) :
         PostsActivityContract.ViewModel {
 
+    companion object {
+        val PAGE_SIZE = 20
+        val PAGE_HINT_INITIAL_LOAD = 60  // default is 3 * PAGE_SIZE
+        val PAGE_PREFETCH_DISTANCE = 20 // default is PAGE_SIZE
+    }
+
     private val navigator = WeakReference<PostsActivityContract.NavigateForPost>(navigateForPost)
 
     private val disposables = CompositeDisposable()
 
+    private val observablePagedPosts =
+            RxPagedListBuilder(
+                    repository.getPosts(),
+                    PagedList.Config.Builder()
+                            .setPageSize(PAGE_SIZE)
+                            .setInitialLoadSizeHint(PAGE_HINT_INITIAL_LOAD)
+                            .setPrefetchDistance(PAGE_PREFETCH_DISTANCE)
+                            .setEnablePlaceholders(true)
+                            .build())
+                    .buildObservable()
+
     override val error = ObservableField<String>()
 
-    override val posts = ObservableField<List<Post>>(ArrayList<Post>(0))
+    override val posts = ObservableField<PagedList<Post>>()
 
     override val progressVisible = ObservableBoolean()
 
     override fun onCreate() {
         error.set("")
-        disposables.add(repository.getPosts()
+        disposables.add(observablePagedPosts
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(

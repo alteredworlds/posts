@@ -76,6 +76,10 @@ dependencies {
     // Architecture Components
     // ViewModel and LiveData
     implementation "android.arch.lifecycle:extensions:$arch_lifecycle_version"
+    // Paging
+    implementation "android.arch.paging:runtime:$paging_version"
+    // RxJava support, currently in alpha
+    implementation "android.arch.paging:rxjava2:$paging_rxjava"
     // Java8 support for Lifecycles
     implementation "android.arch.lifecycle:common-java8:$arch_lifecycle_version"
     // Room
@@ -111,6 +115,8 @@ dependencies {
     testImplementation "org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version"
     testImplementation "com.squareup.leakcanary:leakcanary-android-no-op:$leak_canary_version"
     testImplementation "android.arch.persistence.room:testing:$arch_room_version"
+    // Paging - without Android dependencies for testing
+    testImplementation "android.arch.paging:common:$paging_version"
 
     // LOCAL UNIT TESTS: annotation processing
     kaptTest "com.google.dagger:dagger-compiler:$dagger_version"

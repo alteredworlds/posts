@@ -1,6 +1,6 @@
 package com.example.twcgilbert.postsapp.ui.posts.adapter
 
-import android.support.v7.recyclerview.extensions.ListAdapter
+import android.arch.paging.PagedListAdapter
 import android.support.v7.util.DiffUtil
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -14,7 +14,7 @@ import com.example.twcgilbert.postsapp.ui.posts.PostsActivityContract
  */
 class PostsAdapter(
         private val onPostClicked: PostsActivityContract.PostClicked?) :
-        ListAdapter<Post, PostItemViewHolder>(object : DiffUtil.ItemCallback<Post>() {
+        PagedListAdapter<Post, PostItemViewHolder>(object : DiffUtil.ItemCallback<Post>() {
 
             override fun areItemsTheSame(oldItem: Post?, newItem: Post?) =
                     oldItem?.id == newItem?.id
@@ -37,6 +37,9 @@ class PostsAdapter(
     }
 
     override fun onItemClick(position: Int) {
-        onPostClicked?.onPostClicked(getItem(position))
+        val item = getItem(position)
+        if (null != item) {
+            onPostClicked?.onPostClicked(item)
+        }
     }
 }

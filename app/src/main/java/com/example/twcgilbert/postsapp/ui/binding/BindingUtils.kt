@@ -23,9 +23,13 @@ fun setVerticalDivider(recyclerView: RecyclerView, drawable: Drawable) {
 
 @BindingAdapter("imageUrl")
 fun setImageUrl(imageView: ImageView, url: String) {
-    Picasso.with(imageView.context)
-            .load(url)
-            .into(imageView);
+    if (url.isEmpty()) {
+        imageView.setImageDrawable(null)
+    } else {
+        Picasso.with(imageView.context)
+                .load(url)
+                .into(imageView);
+    }
 }
 
 @BindingAdapter("snackBarText")

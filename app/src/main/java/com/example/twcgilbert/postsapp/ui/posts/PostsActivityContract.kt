@@ -1,5 +1,6 @@
 package com.example.twcgilbert.postsapp.ui.posts
 
+import android.arch.paging.PagedList
 import android.databinding.ObservableBoolean
 import android.databinding.ObservableField
 import com.example.twcgilbert.postsapp.common.ui.BaseContract
@@ -24,7 +25,7 @@ interface PostsActivityContract {
 
         val error: ObservableField<String>
 
-        val posts: ObservableField<List<Post>>
+        val posts: ObservableField<PagedList<Post>>
 
         val progressVisible: ObservableBoolean
 
