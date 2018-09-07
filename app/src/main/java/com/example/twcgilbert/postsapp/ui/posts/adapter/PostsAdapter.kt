@@ -12,18 +12,9 @@ import com.example.twcgilbert.postsapp.ui.posts.PostsActivityContract
 /**
  * Created by twcgilbert on 01/10/2017.
  */
-class PostsAdapter(
-        private val onPostClicked: PostsActivityContract.PostClicked?) :
-        PagedListAdapter<Post, PostItemViewHolder>(object : DiffUtil.ItemCallback<Post>() {
-
-            override fun areItemsTheSame(oldItem: Post?, newItem: Post?) =
-                    oldItem?.id == newItem?.id
-
-            override fun areContentsTheSame(oldItem: Post?, newItem: Post?) =
-                    oldItem == newItem
-        }),
+class PostsAdapter(private val onPostClicked: PostsActivityContract.PostClicked?) :
+        PagedListAdapter<Post, PostItemViewHolder>(DiffUtilItemCallbackPost()),
         AdapterItemClick {
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PostItemViewHolder {
         val binding = PostItemBinding.inflate(
                 LayoutInflater.from(parent.context),
@@ -41,5 +32,13 @@ class PostsAdapter(
         if (null != item) {
             onPostClicked?.onPostClicked(item)
         }
+    }
+
+    private class DiffUtilItemCallbackPost : DiffUtil.ItemCallback<Post>() {
+        override fun areItemsTheSame(oldItem: Post, newItem: Post) =
+                oldItem.id == newItem.id
+
+        override fun areContentsTheSame(oldItem: Post, newItem: Post) =
+                oldItem == newItem
     }
 }

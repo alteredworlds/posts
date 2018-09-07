@@ -13,7 +13,7 @@ import retrofit2.http.Query
 interface PostsService {
 
     companion object {
-        const val BASE_URL = "http://jsonplaceholder.typicode.com/"
+        const val BASE_URL = "https://jsonplaceholder.typicode.com/"
 
         const val POSTS = "posts"
 
