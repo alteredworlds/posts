@@ -26,7 +26,7 @@ fun setImageUrl(imageView: ImageView, url: String) {
     if (url.isEmpty()) {
         imageView.setImageDrawable(null)
     } else {
-        Picasso.with(imageView.context)
+        Picasso.get()
                 .load(url)
                 .into(imageView);
     }
