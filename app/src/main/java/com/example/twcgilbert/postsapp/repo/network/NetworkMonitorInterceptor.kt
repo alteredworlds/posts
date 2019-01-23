@@ -26,6 +26,6 @@ class NetworkMonitorInterceptor(context: Application) : Interceptor {
     }
 
     private fun isNetworkAvailable(): Boolean {
-        return connectivityManager?.activeNetworkInfo?.isConnectedOrConnecting ?: false
+        return connectivityManager?.activeNetworkInfo?.isConnected ?: false
     }
 }
