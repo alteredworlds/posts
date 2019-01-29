@@ -1,7 +1,7 @@
 package com.example.twcgilbert.postsapp.ui.detail
 
-import android.databinding.ObservableField
-import android.databinding.ObservableInt
+import androidx.databinding.ObservableField
+import androidx.databinding.ObservableInt
 import com.example.twcgilbert.postsapp.common.ui.BaseContract
 
 /**

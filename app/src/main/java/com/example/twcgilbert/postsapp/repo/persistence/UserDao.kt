@@ -1,6 +1,6 @@
 package com.example.twcgilbert.postsapp.repo.persistence
 
-import android.arch.persistence.room.*
+import androidx.room.*
 import com.example.twcgilbert.postsapp.repo.persistence.model.UserEntity
 import io.reactivex.Flowable
 

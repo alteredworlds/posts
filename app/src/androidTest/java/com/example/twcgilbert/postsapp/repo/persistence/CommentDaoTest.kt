@@ -16,11 +16,11 @@
 
 package com.example.twcgilbert.postsapp.repo.persistence
 
-import android.arch.core.executor.testing.InstantTaskExecutorRule
-import android.arch.persistence.room.Room
 import android.database.sqlite.SQLiteConstraintException
-import android.support.test.InstrumentationRegistry
-import android.support.test.runner.AndroidJUnit4
+import androidx.arch.core.executor.testing.InstantTaskExecutorRule
+import androidx.room.Room
+import androidx.test.InstrumentationRegistry
+import androidx.test.runner.AndroidJUnit4
 import com.example.twcgilbert.postsapp.repo.persistence.DaoTestConstants.Companion.COMMENT
 import com.example.twcgilbert.postsapp.repo.persistence.DaoTestConstants.Companion.COMMENT1
 import com.example.twcgilbert.postsapp.repo.persistence.DaoTestConstants.Companion.COMMENT2

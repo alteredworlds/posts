@@ -1,9 +1,9 @@
 package com.example.twcgilbert.postsapp.ui.posts.adapter
 
-import android.arch.paging.PagedListAdapter
-import android.support.v7.util.DiffUtil
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.paging.PagedListAdapter
+import androidx.recyclerview.widget.DiffUtil
 import com.example.twcgilbert.postsapp.common.ui.adapter.AdapterItemClick
 import com.example.twcgilbert.postsapp.databinding.PostItemBinding
 import com.example.twcgilbert.postsapp.repo.model.Post

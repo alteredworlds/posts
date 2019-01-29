@@ -1,22 +1,19 @@
 package com.example.twcgilbert.postsapp.ui.binding
 
-import android.databinding.BindingAdapter
 import android.graphics.drawable.Drawable
-import android.support.design.widget.CoordinatorLayout
-import android.support.design.widget.Snackbar
-import android.support.v7.widget.DividerItemDecoration
-import android.support.v7.widget.RecyclerView
 import android.widget.ImageView
+import androidx.databinding.BindingAdapter
+import com.google.android.material.snackbar.Snackbar
 import com.squareup.picasso.Picasso
 
 /**
  * Created by twcgilbert on 01/10/2017.
  */
 @BindingAdapter("horizontalDivider")
-fun setVerticalDivider(recyclerView: RecyclerView, drawable: Drawable) {
-    val verticalDecoration = DividerItemDecoration(
+fun setVerticalDivider(recyclerView: androidx.recyclerview.widget.RecyclerView, drawable: Drawable) {
+    val verticalDecoration = androidx.recyclerview.widget.DividerItemDecoration(
             recyclerView.context,
-            DividerItemDecoration.VERTICAL)
+            androidx.recyclerview.widget.DividerItemDecoration.VERTICAL)
     verticalDecoration.setDrawable(drawable)
     recyclerView.addItemDecoration(verticalDecoration)
 }
@@ -33,7 +30,7 @@ fun setImageUrl(imageView: ImageView, url: String) {
 }
 
 @BindingAdapter("snackBarText")
-fun setSnackbarText(coordinatorLayout: CoordinatorLayout, text: String?) {
+fun setSnackbarText(coordinatorLayout: androidx.coordinatorlayout.widget.CoordinatorLayout, text: String?) {
     if ((null != text) && text.isNotEmpty()) {
         Snackbar.make(coordinatorLayout, text, Snackbar.LENGTH_LONG)
                 .show();

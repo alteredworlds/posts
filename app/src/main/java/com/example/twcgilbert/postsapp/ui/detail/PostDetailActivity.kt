@@ -1,7 +1,7 @@
 package com.example.twcgilbert.postsapp.ui.detail
 
-import android.databinding.DataBindingUtil
 import android.os.Bundle
+import androidx.databinding.DataBindingUtil
 import com.example.twcgilbert.postsapp.R
 import com.example.twcgilbert.postsapp.common.ui.BaseActivity
 import com.example.twcgilbert.postsapp.databinding.PostDetailActivityBinding

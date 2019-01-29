@@ -16,10 +16,10 @@
 
 package com.example.twcgilbert.postsapp.repo.persistence
 
-import android.arch.core.executor.testing.InstantTaskExecutorRule
-import android.arch.persistence.room.Room
-import android.support.test.InstrumentationRegistry
-import android.support.test.runner.AndroidJUnit4
+import androidx.arch.core.executor.testing.InstantTaskExecutorRule
+import androidx.room.Room
+import androidx.test.InstrumentationRegistry
+import androidx.test.runner.AndroidJUnit4
 import com.example.twcgilbert.postsapp.repo.persistence.DaoTestConstants.Companion.USER
 import com.example.twcgilbert.postsapp.repo.persistence.model.UserEntity
 import org.junit.After

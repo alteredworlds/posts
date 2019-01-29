@@ -1,7 +1,7 @@
 package com.example.twcgilbert.postsapp.repo.di
 
 import android.app.Application
-import android.arch.persistence.room.Room
+import androidx.room.Room
 import com.example.twcgilbert.postsapp.repo.DataRepository
 import com.example.twcgilbert.postsapp.repo.DataRepositoryImpl
 import com.example.twcgilbert.postsapp.repo.domain.*

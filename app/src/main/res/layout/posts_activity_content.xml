@@ -9,11 +9,11 @@
             type="com.example.twcgilbert.postsapp.ui.posts.PostsActivityContract.ViewModel" />
     </data>
 
-    <android.support.constraint.ConstraintLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <android.support.v4.widget.SwipeRefreshLayout
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
             android:id="@+id/swiperefresh"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -21,7 +21,7 @@
             app:onRefreshListener="@{() -> viewModel.onRefresh()}"
             app:refreshing="@{viewModel.progressVisible}">
 
-            <android.support.v7.widget.RecyclerView
+            <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -29,11 +29,11 @@
                 android:layout_marginStart="@dimen/left_right_margin"
                 android:text="Hello World!"
                 app:horizontalDivider="@{@drawable/horizontal_space_divider}"
-                app:layoutManager="android.support.v7.widget.LinearLayoutManager"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:posts="@{viewModel.posts}"
                 app:postsClickListener="@{viewModel}" />
-        </android.support.v4.widget.SwipeRefreshLayout>
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
-    </android.support.constraint.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>

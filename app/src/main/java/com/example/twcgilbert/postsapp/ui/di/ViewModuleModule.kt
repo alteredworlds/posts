@@ -1,6 +1,6 @@
 package com.example.twcgilbert.postsapp.ui.di
 
-import android.arch.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProvider
 import com.example.twcgilbert.postsapp.common.di.ViewModelFactory
 import dagger.Binds
 import dagger.Module

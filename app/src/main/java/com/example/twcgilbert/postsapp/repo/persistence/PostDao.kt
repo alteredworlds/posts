@@ -1,7 +1,7 @@
 package com.example.twcgilbert.postsapp.repo.persistence
 
-import android.arch.paging.DataSource
-import android.arch.persistence.room.*
+import androidx.paging.DataSource
+import androidx.room.*
 import com.example.twcgilbert.postsapp.repo.model.Post
 import com.example.twcgilbert.postsapp.repo.persistence.model.PostEntity
 import io.reactivex.Flowable

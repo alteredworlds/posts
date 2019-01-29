@@ -1,9 +1,8 @@
 package com.example.twcgilbert.postsapp.ui.posts.adapter
 
-import android.databinding.ObservableField
-import android.databinding.ViewDataBinding
-import android.support.v7.widget.RecyclerView
 import android.view.View
+import androidx.databinding.ObservableField
+import androidx.databinding.ViewDataBinding
 import com.example.twcgilbert.postsapp.BR
 import com.example.twcgilbert.postsapp.common.ui.adapter.AdapterItemClick
 import com.example.twcgilbert.postsapp.repo.model.Post
@@ -15,7 +14,7 @@ import com.example.twcgilbert.postsapp.ui.avatar.imageUrl
 class PostItemViewHolder(
         private val binding: ViewDataBinding,
         private val itemClick: AdapterItemClick?) :
-        RecyclerView.ViewHolder(binding.root),
+        androidx.recyclerview.widget.RecyclerView.ViewHolder(binding.root),
         PostItemContract {
 
     override val title: ObservableField<String> = ObservableField()

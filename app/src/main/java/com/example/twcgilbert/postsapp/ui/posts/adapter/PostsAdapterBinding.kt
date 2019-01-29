@@ -1,8 +1,7 @@
 package com.example.twcgilbert.postsapp.ui.posts.adapter
 
-import android.arch.paging.PagedList
-import android.databinding.BindingAdapter
-import android.support.v7.widget.RecyclerView
+import androidx.databinding.BindingAdapter
+import androidx.paging.PagedList
 import com.example.twcgilbert.postsapp.repo.model.Post
 import com.example.twcgilbert.postsapp.ui.posts.PostsActivityContract
 
@@ -11,7 +10,7 @@ import com.example.twcgilbert.postsapp.ui.posts.PostsActivityContract
  */
 
 @BindingAdapter("posts", "postsClickListener", requireAll = true)
-fun bindPostsAdapter(recyclerView: RecyclerView,
+fun bindPostsAdapter(recyclerView: androidx.recyclerview.widget.RecyclerView,
                      posts: PagedList<Post>?,
                      onPostClicked: PostsActivityContract.PostClicked?) {
     var postsAdapter = recyclerView.adapter as? PostsAdapter

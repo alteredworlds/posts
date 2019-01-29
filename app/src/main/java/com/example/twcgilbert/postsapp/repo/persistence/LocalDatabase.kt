@@ -1,7 +1,7 @@
 package com.example.twcgilbert.postsapp.repo.persistence
 
-import android.arch.persistence.room.Database
-import android.arch.persistence.room.RoomDatabase
+import androidx.room.Database
+import androidx.room.RoomDatabase
 import com.example.twcgilbert.postsapp.repo.persistence.model.CommentEntity
 import com.example.twcgilbert.postsapp.repo.persistence.model.PostEntity
 import com.example.twcgilbert.postsapp.repo.persistence.model.UserEntity

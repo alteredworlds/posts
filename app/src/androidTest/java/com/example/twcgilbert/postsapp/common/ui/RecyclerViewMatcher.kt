@@ -5,9 +5,7 @@ package com.example.twcgilbert.postsapp.common.ui
  */
 
 import android.content.res.Resources
-import android.support.v7.widget.RecyclerView
 import android.view.View
-
 import org.hamcrest.Description
 import org.hamcrest.Matcher
 import org.hamcrest.TypeSafeMatcher
@@ -46,7 +44,7 @@ class RecyclerViewMatcher(private val recyclerViewId: Int) {
                 this.resources = view.resources
 
                 if (childView == null) {
-                    val recyclerView = view.rootView.findViewById<View>(recyclerViewId) as RecyclerView?
+                    val recyclerView = view.rootView.findViewById<View>(recyclerViewId) as androidx.recyclerview.widget.RecyclerView?
                     if (recyclerView != null && recyclerView.id == recyclerViewId) {
                         val viewHolder = recyclerView.findViewHolderForAdapterPosition(position)
                         if (viewHolder != null) {

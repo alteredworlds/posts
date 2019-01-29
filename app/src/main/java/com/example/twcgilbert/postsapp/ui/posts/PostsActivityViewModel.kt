@@ -1,9 +1,9 @@
 package com.example.twcgilbert.postsapp.ui.posts
 
-import android.arch.paging.PagedList
-import android.arch.paging.RxPagedListBuilder
-import android.databinding.ObservableBoolean
-import android.databinding.ObservableField
+import androidx.databinding.ObservableBoolean
+import androidx.databinding.ObservableField
+import androidx.paging.PagedList
+import androidx.paging.RxPagedListBuilder
 import com.example.twcgilbert.postsapp.repo.DataRepository
 import com.example.twcgilbert.postsapp.repo.domain.RefreshPostsUseCase
 import com.example.twcgilbert.postsapp.repo.model.Post

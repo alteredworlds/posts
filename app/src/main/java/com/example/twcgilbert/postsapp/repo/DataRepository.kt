@@ -1,6 +1,6 @@
 package com.example.twcgilbert.postsapp.repo
 
-import android.arch.paging.DataSource
+import androidx.paging.DataSource
 import com.example.twcgilbert.postsapp.repo.model.Post
 import io.reactivex.Flowable
 

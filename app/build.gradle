@@ -54,11 +54,11 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation "com.android.support:appcompat-v7:$support_library_version"
-    implementation "com.android.support:recyclerview-v7:$support_library_version"
-    implementation "com.android.support.constraint:constraint-layout:$constraint_layout_version"
-    implementation "com.android.support:support-v4:$support_library_version"
-    implementation "com.android.support:design:$support_library_version"
+    implementation "androidx.appcompat:appcompat:$support_library_version"
+    implementation "androidx.recyclerview:recyclerview:$support_library_version"
+    implementation "androidx.constraintlayout:constraintlayout:$constraint_layout_version"
+    implementation "androidx.legacy:legacy-support-v4:$support_library_version"
+    implementation "com.google.android.material:material:$support_library_version"
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
 
     // annotation processing for normal builds
@@ -75,18 +75,18 @@ dependencies {
 
     // Architecture Components
     // ViewModel and LiveData
-    implementation "android.arch.lifecycle:extensions:$arch_lifecycle_version"
+    implementation "androidx.lifecycle:lifecycle-extensions:$arch_lifecycle_version"
     // Paging
-    implementation "android.arch.paging:runtime:$paging_version"
+    implementation "androidx.paging:paging-runtime:$paging_version"
     // RxJava support, currently in alpha
     implementation "android.arch.paging:rxjava2:$paging_rxjava"
     // Java8 support for Lifecycles
-    implementation "android.arch.lifecycle:common-java8:$arch_lifecycle_version"
+    implementation "androidx.lifecycle:lifecycle-common-java8:$arch_lifecycle_version"
     // Room
-    implementation "android.arch.persistence.room:runtime:$arch_room_version"
-    kapt "android.arch.persistence.room:compiler:$arch_room_version"
+    implementation "androidx.room:room-runtime:$arch_room_version"
+    kapt "androidx.room:room-compiler:$arch_room_version"
     // RxJava support for Room
-    implementation "android.arch.persistence.room:rxjava2:$arch_room_version"
+    implementation "androidx.room:room-rxjava2:$arch_room_version"
 
     // Okhttp logging
     implementation "com.squareup.okhttp3:logging-interceptor:$okhttp_version"
@@ -114,9 +114,9 @@ dependencies {
     testImplementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     testImplementation "org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version"
     testImplementation "com.squareup.leakcanary:leakcanary-android-no-op:$leak_canary_version"
-    testImplementation "android.arch.persistence.room:testing:$arch_room_version"
+    testImplementation "androidx.room:room-testing:$arch_room_version"
     // Paging - without Android dependencies for testing
-    testImplementation "android.arch.paging:common:$paging_version"
+    testImplementation "androidx.paging:paging-common:$paging_version"
 
     // LOCAL UNIT TESTS: annotation processing
     kaptTest "com.google.dagger:dagger-compiler:$dagger_version"
@@ -125,11 +125,11 @@ dependencies {
     // ANDROID UNIT TESTS: dependencies
     androidTestImplementation "junit:junit:$junit_version"
     androidTestImplementation "org.mockito:mockito-core:$mockito_version"
-    androidTestImplementation("com.android.support.test.espresso:espresso-core:$espresso_version", {
+    androidTestImplementation("androidx.test.espresso:espresso-core:$espresso_version", {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    androidTestImplementation "com.android.support.test.espresso:espresso-intents:$espresso_version"
-    androidTestImplementation("com.android.support.test.espresso:espresso-contrib:$espresso_version") {
+    androidTestImplementation "androidx.test.espresso:espresso-intents:$espresso_version"
+    androidTestImplementation("androidx.test.espresso:espresso-contrib:$espresso_version") {
         exclude group: 'com.android.support', module: 'appcompat'
         exclude group: 'com.android.support', module: 'support-v4'
         exclude group: 'com.android.support', module: 'support-v7'
@@ -141,7 +141,7 @@ dependencies {
     androidTestImplementation "com.google.dagger:dagger-android:$dagger_version"
     androidTestImplementation "com.google.dagger:dagger-android-support:$dagger_version"
     androidTestImplementation "com.squareup.leakcanary:leakcanary-android-no-op:$leak_canary_version"
-    androidTestImplementation "android.arch.core:core-testing:$arch_core_version"
+    androidTestImplementation "androidx.arch.core:core-testing:$arch_core_version"
 
     // ANDROID UNIT TESTS: annotation processing
     kaptAndroidTest "com.google.dagger:dagger-compiler:$dagger_version"

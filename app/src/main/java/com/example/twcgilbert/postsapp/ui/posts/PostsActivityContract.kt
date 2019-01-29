@@ -1,8 +1,8 @@
 package com.example.twcgilbert.postsapp.ui.posts
 
-import android.arch.paging.PagedList
-import android.databinding.ObservableBoolean
-import android.databinding.ObservableField
+import androidx.databinding.ObservableBoolean
+import androidx.databinding.ObservableField
+import androidx.paging.PagedList
 import com.example.twcgilbert.postsapp.common.ui.BaseContract
 import com.example.twcgilbert.postsapp.repo.model.Post
 

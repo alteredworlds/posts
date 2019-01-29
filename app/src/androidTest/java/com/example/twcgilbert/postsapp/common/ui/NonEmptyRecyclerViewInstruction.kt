@@ -1,7 +1,6 @@
 package com.example.twcgilbert.postsapp.common.ui
 
-import android.support.test.InstrumentationRegistry
-import android.support.v7.widget.RecyclerView
+import androidx.test.InstrumentationRegistry
 import com.azimolabs.conditionwatcher.Instruction
 import com.example.twcgilbert.postsapp.R
 import com.example.twcgilbert.postsapp.app.TestApp
@@ -16,7 +15,7 @@ class NonEmptyRecyclerViewInstruction : Instruction() {
         var retVal = false
         val testApp = InstrumentationRegistry.getTargetContext().applicationContext as? TestApp
         if (null != testApp) {
-            val recyclerView = testApp.currentActivity?.findViewById<RecyclerView>(R.id.recyclerView)
+            val recyclerView = testApp.currentActivity?.findViewById<androidx.recyclerview.widget.RecyclerView>(R.id.recyclerView)
             if (null != recyclerView) {
                 val adapter = recyclerView.adapter
                 if (null != adapter) {
