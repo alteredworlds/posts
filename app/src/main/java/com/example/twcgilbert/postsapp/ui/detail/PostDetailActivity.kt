@@ -2,9 +2,13 @@ package com.example.twcgilbert.postsapp.ui.detail
 
 import android.os.Bundle
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProviders
 import com.example.twcgilbert.postsapp.R
 import com.example.twcgilbert.postsapp.common.ui.BaseActivity
 import com.example.twcgilbert.postsapp.databinding.PostDetailActivityBinding
+import com.example.twcgilbert.postsapp.repo.model.getPost
+import dagger.android.AndroidInjection
 import javax.inject.Inject
 
 /**
@@ -12,20 +16,21 @@ import javax.inject.Inject
  */
 class PostDetailActivity : BaseActivity() {
 
-    @Inject lateinit var viewModel: PostDetailActivityContract.ViewModel
+    @Inject
+    lateinit var viewModelFactory: ViewModelProvider.Factory
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        AndroidInjection.inject(this)
         super.onCreate(savedInstanceState)
 
         val binding = DataBindingUtil.setContentView<PostDetailActivityBinding>(
                 this,
                 R.layout.post_detail_activity)
-        binding.viewModel = viewModel
-        viewModel.onCreate()
-    }
+        binding.setLifecycleOwner(this)
 
-    override fun onDestroy() {
-        viewModel.onDestroy()
-        super.onDestroy()
+        val viewModel = ViewModelProviders.of(this, viewModelFactory)
+                .get(PostDetailActivityViewModel::class.java)
+        viewModel.post = intent.getPost()
+        binding.viewModel = viewModel
     }
 }

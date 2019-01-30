@@ -1,7 +1,7 @@
 package com.example.twcgilbert.postsapp.ui.detail
 
-import androidx.databinding.ObservableField
-import androidx.databinding.ObservableInt
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import com.example.twcgilbert.postsapp.repo.DataRepository
 import com.example.twcgilbert.postsapp.repo.domain.RefreshCommentsUseCase
 import com.example.twcgilbert.postsapp.repo.model.Post
@@ -10,62 +10,82 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import timber.log.Timber
+import javax.inject.Inject
 
 /**
  * Created by twcgilbert on 01/10/2017.
  */
-class PostDetailActivityViewModel(
-        private val post: Post,
+class PostDetailActivityViewModel @Inject constructor(
         private val repository: DataRepository,
         private val refreshUseCase: RefreshCommentsUseCase) :
-        PostDetailActivityContract.ViewModel {
+        ViewModel(), PostDetailActivityContract.ViewModel {
 
     private val disposables = CompositeDisposable()
 
-    override val error = ObservableField<String>()
+    override val postTitle = MutableLiveData<String>()
 
-    override val postTitle = ObservableField<String>(post.title)
+    override val postBody = MutableLiveData<String>()
 
-    override val postBody = ObservableField<String>(post.body)
+    override val postUserName = MutableLiveData<String>()
 
-    override val postUserName = ObservableField<String>(post.userName)
+    override val userAvatarUrl = MutableLiveData<String>()
 
-    override val userAvatarUrl =  ObservableField<String>(post.imageUrl)
+    override val error = MutableLiveData<String>()
 
-    override val postNumberOfComments = ObservableInt()
+    override val postNumberOfComments = MutableLiveData<Int>()
 
-    override fun onCreate() {
+    var post: Post? = null
+        set(value) {
+            if (field != value) {
+                field = value
+                updatePostInfo(value)
+            }
+        }
+
+    private fun updatePostInfo(post: Post?) {
+        postTitle.postValue(post?.title)
+        postBody.postValue(post?.body)
+        postUserName.postValue(post?.userName)
+        userAvatarUrl.postValue(post?.imageUrl)
+
+        if (null != post) {
+            requestNumberOfComments(post.id)
+        }
+    }
+
+    private fun requestNumberOfComments(postId: Int) {
         // find number of comments from cache
         disposables.add(repository
-                .getNumComments(post.id)
+                .getNumComments(postId)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
                         {
-                            postNumberOfComments.set(it)
-                            error.set("")
+                            postNumberOfComments.value = it
+                            error.value = ""
                         },
                         {
-                            error.set(it.localizedMessage)
+                            error.value = it.localizedMessage
                         }
                 )
         )
         // also initiate network refresh
         disposables.add(refreshUseCase
-                .execute(post.id)
+                .execute(postId)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
                         {
-                            Timber.d("Retrieved comments for ${post.id}")
-                            error.set("")
+                            Timber.d("Retrieved comments for ${postId}")
+                            error.value = ""
                         },
                         {
-                            error.set(it.localizedMessage)
+                            error.value = it.localizedMessage
                         }
                 ))
     }
 
-    override fun onDestroy() {
+    override fun onCleared() {
+        super.onCleared()
         disposables.dispose()
     }
 }

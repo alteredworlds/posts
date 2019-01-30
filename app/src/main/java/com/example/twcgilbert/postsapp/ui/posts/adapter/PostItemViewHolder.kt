@@ -1,10 +1,10 @@
 package com.example.twcgilbert.postsapp.ui.posts.adapter
 
 import android.view.View
-import androidx.databinding.ObservableField
 import androidx.databinding.ViewDataBinding
 import com.example.twcgilbert.postsapp.BR
 import com.example.twcgilbert.postsapp.common.ui.adapter.AdapterItemClick
+import com.example.twcgilbert.postsapp.common.ui.adapter.LifecycleViewHolder
 import com.example.twcgilbert.postsapp.repo.model.Post
 import com.example.twcgilbert.postsapp.ui.avatar.imageUrl
 
@@ -14,12 +14,16 @@ import com.example.twcgilbert.postsapp.ui.avatar.imageUrl
 class PostItemViewHolder(
         private val binding: ViewDataBinding,
         private val itemClick: AdapterItemClick?) :
-        androidx.recyclerview.widget.RecyclerView.ViewHolder(binding.root),
+        LifecycleViewHolder(binding.root),
         PostItemContract {
 
-    override val title: ObservableField<String> = ObservableField()
+    init {
+        binding.setLifecycleOwner(this)
+    }
 
-    override val userAvatarUrl = ObservableField<String>()
+    override var title: String? = null
+
+    override var userAvatarUrl: String? = null
 
     override fun onClick(p0: View?) {
         itemClick?.onItemClick(adapterPosition)
@@ -35,7 +39,7 @@ class PostItemViewHolder(
     }
 
     private fun update(postItem: Post?) {
-        title.set(postItem?.title ?: "")
-        userAvatarUrl.set(postItem?.imageUrl ?: "")
+        title = postItem?.title
+        userAvatarUrl = postItem?.imageUrl
     }
 }

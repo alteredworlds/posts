@@ -3,6 +3,7 @@ package com.example.twcgilbert.postsapp.app.di
 import android.app.Application
 import com.example.twcgilbert.postsapp.app.PostsApplication
 import com.example.twcgilbert.postsapp.repo.di.RepoModule
+import com.example.twcgilbert.postsapp.ui.di.ViewModelModule
 import dagger.BindsInstance
 import dagger.Component
 import dagger.android.support.AndroidSupportInjectionModule
@@ -15,7 +16,8 @@ import javax.inject.Singleton
 @Component(modules = arrayOf(
         AndroidSupportInjectionModule::class,
         RepoModule::class,
-        ActivityBuilderModule::class)
+        ActivityBuilderModule::class,
+        ViewModelModule::class)
 )
 interface AppComponent {
     fun inject(application: PostsApplication)

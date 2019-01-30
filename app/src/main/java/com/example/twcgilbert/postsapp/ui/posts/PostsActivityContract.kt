@@ -1,9 +1,8 @@
 package com.example.twcgilbert.postsapp.ui.posts
 
-import androidx.databinding.ObservableBoolean
-import androidx.databinding.ObservableField
+import androidx.lifecycle.LiveData
 import androidx.paging.PagedList
-import com.example.twcgilbert.postsapp.common.ui.BaseContract
+import com.example.twcgilbert.postsapp.common.ui.util.Event
 import com.example.twcgilbert.postsapp.repo.model.Post
 
 /**
@@ -16,18 +15,15 @@ interface PostsActivityContract {
         fun onPostClicked(post: Post)
     }
 
-    interface NavigateForPost {
+    interface ViewModel : PostClicked {
 
-        fun navigateForPost(post: Post)
-    }
+        val error: LiveData<String>
 
-    interface ViewModel : BaseContract.ViewModel, PostClicked {
+        val posts: LiveData<PagedList<Post>>
 
-        val error: ObservableField<String>
+        val progressVisible: LiveData<Boolean>
 
-        val posts: ObservableField<PagedList<Post>>
-
-        val progressVisible: ObservableBoolean
+        val navigateForPost: LiveData<Event<Post>>
 
         fun onRefresh()
     }

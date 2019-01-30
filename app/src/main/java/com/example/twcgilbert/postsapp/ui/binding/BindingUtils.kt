@@ -19,8 +19,8 @@ fun setVerticalDivider(recyclerView: androidx.recyclerview.widget.RecyclerView, 
 }
 
 @BindingAdapter("imageUrl")
-fun setImageUrl(imageView: ImageView, url: String) {
-    if (url.isEmpty()) {
+fun setImageUrl(imageView: ImageView, url: String?) {
+    if ((url == null) || url.isEmpty()) {
         imageView.setImageDrawable(null)
     } else {
         Picasso.get()

@@ -2,9 +2,7 @@ package com.example.twcgilbert.postsapp.app.di
 
 import com.example.twcgilbert.postsapp.common.di.ActivityScope
 import com.example.twcgilbert.postsapp.ui.detail.PostDetailActivity
-import com.example.twcgilbert.postsapp.ui.detail.di.PostDetailActivityModule
 import com.example.twcgilbert.postsapp.ui.posts.PostsActivity
-import com.example.twcgilbert.postsapp.ui.posts.di.PostsActivityModule
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 
@@ -14,10 +12,10 @@ import dagger.android.ContributesAndroidInjector
 @Module
 abstract class ActivityBuilderModule {
     @ActivityScope
-    @ContributesAndroidInjector(modules = arrayOf(PostsActivityModule::class))
+    @ContributesAndroidInjector
     abstract fun bindPostsActivity(): PostsActivity
 
     @ActivityScope
-    @ContributesAndroidInjector(modules = arrayOf(PostDetailActivityModule::class))
+    @ContributesAndroidInjector
     abstract fun bindPostDetailActivity(): PostDetailActivity
 }

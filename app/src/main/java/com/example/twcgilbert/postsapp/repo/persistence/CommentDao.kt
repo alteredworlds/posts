@@ -43,7 +43,7 @@ abstract class CommentDao {
     /**
      * Update Comments
      */
-    @Update(onConflict = OnConflictStrategy.ROLLBACK)
+    @Update(onConflict = OnConflictStrategy.ABORT)
     abstract fun updateAll(comments: List<CommentEntity>)
 
     /**

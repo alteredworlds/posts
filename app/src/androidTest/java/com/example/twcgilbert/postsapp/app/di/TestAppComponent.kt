@@ -3,6 +3,7 @@ package com.example.twcgilbert.postsapp.app.di
 import android.app.Application
 import com.example.twcgilbert.postsapp.app.TestApp
 import com.example.twcgilbert.postsapp.repo.di.TestRepoModule
+import com.example.twcgilbert.postsapp.ui.di.ViewModelModule
 import dagger.BindsInstance
 import dagger.Component
 import dagger.android.support.AndroidSupportInjectionModule
@@ -16,7 +17,8 @@ import javax.inject.Singleton
         AndroidSupportInjectionModule::class,
         //RepoModule::class, // uncomment => all posts in androidTest
         TestRepoModule::class, // this shows just one post, so one or the other
-        ActivityBuilderModule::class)
+        ActivityBuilderModule::class,
+        ViewModelModule::class)
 )
 interface TestAppComponent {
     fun inject(application: TestApp): TestApp

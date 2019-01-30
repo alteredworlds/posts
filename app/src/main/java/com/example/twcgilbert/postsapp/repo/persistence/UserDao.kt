@@ -36,7 +36,7 @@ abstract class UserDao {
     /**
      * Update Users (rollback if attempt made to update non-existant user)
      */
-    @Update(onConflict = OnConflictStrategy.ROLLBACK)
+    @Update(onConflict = OnConflictStrategy.ABORT)
     abstract fun updateAll(users: List<UserEntity>)
 
     /**
