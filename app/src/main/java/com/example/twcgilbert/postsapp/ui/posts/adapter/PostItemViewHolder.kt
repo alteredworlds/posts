@@ -2,9 +2,9 @@ package com.example.twcgilbert.postsapp.ui.posts.adapter
 
 import android.view.View
 import androidx.databinding.ViewDataBinding
+import androidx.recyclerview.widget.RecyclerView
 import com.example.twcgilbert.postsapp.BR
 import com.example.twcgilbert.postsapp.common.ui.adapter.AdapterItemClick
-import com.example.twcgilbert.postsapp.common.ui.adapter.LifecycleViewHolder
 import com.example.twcgilbert.postsapp.repo.model.Post
 import com.example.twcgilbert.postsapp.ui.avatar.imageUrl
 
@@ -14,12 +14,8 @@ import com.example.twcgilbert.postsapp.ui.avatar.imageUrl
 class PostItemViewHolder(
         private val binding: ViewDataBinding,
         private val itemClick: AdapterItemClick?) :
-        LifecycleViewHolder(binding.root),
+        RecyclerView.ViewHolder(binding.root),
         PostItemContract {
-
-    init {
-        binding.setLifecycleOwner(this)
-    }
 
     override var title: String? = null
 

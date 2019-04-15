@@ -34,16 +34,6 @@ class PostsAdapter(private val onPostClicked: PostsActivityContract.PostClicked?
         }
     }
 
-    override fun onViewAttachedToWindow(holder: PostItemViewHolder) {
-        super.onViewAttachedToWindow(holder)
-        holder.onAppear()
-    }
-
-    override fun onViewDetachedFromWindow(holder: PostItemViewHolder) {
-        super.onViewDetachedFromWindow(holder)
-        holder.onDisappear()
-    }
-
     private class DiffUtilItemCallbackPost : DiffUtil.ItemCallback<Post>() {
         override fun areItemsTheSame(oldItem: Post, newItem: Post) =
                 oldItem.id == newItem.id
