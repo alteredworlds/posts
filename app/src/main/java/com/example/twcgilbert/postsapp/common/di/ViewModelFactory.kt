@@ -10,7 +10,8 @@ import kotlin.reflect.KClass
 
 @Singleton
 class ViewModelFactory @Inject constructor(
-        private val viewModels: MutableMap<Class<out ViewModel>, Provider<ViewModel>>) :
+        private val viewModels: MutableMap<Class<out ViewModel>,
+                @JvmSuppressWildcards Provider<ViewModel>>) :
         ViewModelProvider.Factory {
 
     @Suppress("UNCHECKED_CAST")
